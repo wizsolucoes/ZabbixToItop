@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ZabbixToItop", "ZabbixToItop\ZabbixToItop.csproj", "{4FF752E9-0467-407A-8E07-68A2EE318F2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZabbixToItopTests", "ZabbixToItopTests\ZabbixToItopTests.csproj", "{4A54E75A-252F-4013-957E-657BD7CF9C14}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4FF752E9-0467-407A-8E07-68A2EE318F2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF752E9-0467-407A-8E07-68A2EE318F2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF752E9-0467-407A-8E07-68A2EE318F2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF752E9-0467-407A-8E07-68A2EE318F2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A54E75A-252F-4013-957E-657BD7CF9C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A54E75A-252F-4013-957E-657BD7CF9C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A54E75A-252F-4013-957E-657BD7CF9C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A54E75A-252F-4013-957E-657BD7CF9C14}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0A777A90-051D-4FE8-A829-6FA74710460E}
+	EndGlobalSection
+EndGlobal

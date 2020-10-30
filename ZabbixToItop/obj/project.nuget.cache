@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "oQyOCtfTkM2ftu6OE/U6daNpi99PJHAtTzv5FaLal6vmj+66CDcvAfeNK7IHRlAu+3ZH9u5Zl+bZF6ae4ESZPA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\rafaelserafim\\source\\repos\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\system.drawing.common\\4.7.0\\system.drawing.common.4.7.0.nupkg.sha512",
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\system.security.accesscontrol\\4.7.0\\system.security.accesscontrol.4.7.0.nupkg.sha512",
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\system.security.cryptography.protecteddata\\4.7.0\\system.security.cryptography.protecteddata.4.7.0.nupkg.sha512",
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\system.security.permissions\\4.7.0\\system.security.permissions.4.7.0.nupkg.sha512",
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\system.security.principal.windows\\4.7.0\\system.security.principal.windows.4.7.0.nupkg.sha512",
+    "C:\\Users\\rafaelserafim\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}
