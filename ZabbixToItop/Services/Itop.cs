@@ -29,27 +29,38 @@ namespace ZabbixToItop.Services
             {
                 Service_id = "SELECT Service WHERE name='" + config.Service_name + "'",
                 Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'",
-                Origin = config.Current_origin,
-                contacts_list = new List<string> { config.Current_team },
-                Team_id = "SELECT Team WHERE name = '" + config.Current_team + "'", 
+                Origin = config.origin,
+                contacts_list = new List<string> { config.team },
+                Team_id = "SELECT Team WHERE name = '" + config.team + "'", 
                 Caller_id = new Caller
                 {
                     First_name = "Processo",
                     Name = "Automatico"
                 },
-                Description = config.Current_description,
-                Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + config.Current_resource_name + "'",
-                Title = config.Current_title, 
+                Description = config.description,
+                Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + config.ci + "'",
+                Title = config.title, 
                 Functionalcis_list = new List<Functionalcis>
                 {
                     new Functionalcis
                     {
-                        Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.Current_resource_name + "'", 
+                        Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.ci + "'", 
                         Impact_code = "manual"
                     }
                 },
-                Urgency = config.Current_urgency, 
-                Impact = config.Impact
+                Urgency = config.urgency, 
+                Impact = config.Impact, 
+                Private_log = new ItemsList
+                {
+                    Items = new List<Item>
+                    {
+                        new Item
+                        {
+                            Date =  DateTime.Now,
+                            Message = "Resource Group: " + config.resource_group_name + ""
+                        }
+                    }
+                }
             };
             
             Ticket ticket = new Ticket
