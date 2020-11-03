@@ -26,7 +26,7 @@ namespace ZabbixToItop
             }
             catch (System.Exception)
             {
-                throw;
+                Console.WriteLine("throwlow");                
             }
         }
 

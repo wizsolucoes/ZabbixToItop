@@ -44,13 +44,15 @@ namespace ZabbixToItop.Services
                 {
                     new Functionalcis
                     {
-                        Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.ci + "'", 
+                        Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.ci + "'",  
                         Impact_code = "manual"
                     }
                 },
                 Urgency = config.urgency, 
                 Impact = config.Impact
             };
+
+            Console.WriteLine(config.resource_group_name);
 
             if(config.resource_group_name != null){
                 fields.Private_log = new ItemsList

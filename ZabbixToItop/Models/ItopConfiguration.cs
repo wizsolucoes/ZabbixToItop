@@ -15,7 +15,7 @@ namespace ZabbixToItop.Models
             title = ci;
             Impact = args[6];
 
-            if (7 >= args.Length)
+            if (8 > args.Length)
             {
                 if (ServiceLookup.CiServices.ContainsKey(ci))
                 {
@@ -33,8 +33,10 @@ namespace ZabbixToItop.Models
                 Service_name = args[7];
                 Service_subcategory_name = args[8];
             }
+            
+            Console.WriteLine(args.Length);
+            resource_group_name = 10 > args.Length ? null : args[9] == "" ? null : args[9];
 
-            resource_group_name = 9 < args.Length ? args[9] : null;
             Status = "dispatched";
             Comment = ci;
         }

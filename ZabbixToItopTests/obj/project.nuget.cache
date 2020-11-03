@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "30RXS6f4k3IovXguqrM5SMLHrSP9QK11rcHXL6ftP4n3EF8fpvcYc0is/HUQdcxnZKFIUGOmgzf0Y3MdRZODWQ==",
+  "dgSpecHash": "naNUwDTYUjSJOtFKMsQ0tbSt9I/l7+HEgZsSfT7MVJe+UMio8uoO52pSUn8lHjt5uA5mYPwINpEQegDV8EF9wQ==",
   "success": true,
-  "projectFilePath": "c:\\Users\\rafaelserafim\\source\\repos\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj",
+  "projectFilePath": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rafaelserafim\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\rafaelserafim\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",
