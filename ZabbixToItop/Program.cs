@@ -11,16 +11,17 @@ namespace ZabbixToItop
         {
             try
             {
-                if (args.Length == 10)
+                if (args.Length >= 7)
                 {
                     Itop itopApi = new Itop();
                     ItopConfiguration config = new ItopConfiguration(args);
                     string ticketJson = itopApi.GenerateTicket(config);
-                    Console.WriteLine(await itopApi.SaveTicketOnItopAsync(ticketJson));
+                    Console.WriteLine(ticketJson);
+                    //Console.WriteLine(await itopApi.SaveTicketOnItopAsync(ticketJson));
                 }
                 else
                 {
-                    Console.WriteLine("Informe a quantidade correta de argumentos (10)");
+                    Console.WriteLine("Informe a quantidade minima correta de argumentos (7)");
                 }
             }
             catch (System.Exception)

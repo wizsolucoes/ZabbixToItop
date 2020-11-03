@@ -465,11 +465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\rafaelserafim\\source\\repos\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
+      "projectUniqueName": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
       "projectName": "ZabbixToItop",
-      "projectPath": "C:\\Users\\rafaelserafim\\source\\repos\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
+      "projectPath": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
       "packagesPath": "C:\\Users\\rafaelserafim\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\rafaelserafim\\source\\repos\\ZabbixToItop\\ZabbixToItop\\obj\\",
+      "outputPath": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\rafaelserafim\\AppData\\Roaming\\NuGet\\NuGet.Config",

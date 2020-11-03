@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ZabbixToItop.Models
 {
@@ -11,14 +9,32 @@ namespace ZabbixToItop.Models
             Class = args[0];
             description = args[1];
             origin = args[2];
-            resource_group_name = args[3];
-            ci = args[4];
-            urgency = args[5];
-            team = args[6];
+            ci = args[3];
+            urgency = args[4];
+            team = args[5];
             title = ci;
-            Impact = args[7];
-            Service_name = args[8];
-            Service_subcategory_name = args[9];
+            Impact = args[6];
+
+            if (7 >= args.Length)
+            {
+                if (ServiceLookup.CiServices.ContainsKey(ci))
+                {
+                    var serviceLookup = ServiceLookup.CiServices[ci];
+                    Service_name = serviceLookup[0];
+                    Service_subcategory_name = serviceLookup[1];
+                }
+                else
+                {
+                    throw new Exception("Ci não possui service cadastrado no sistema!");
+                }
+            }
+            else
+            {
+                Service_name = args[7];
+                Service_subcategory_name = args[8];
+            }
+
+            resource_group_name = 9 < args.Length ? args[9] : null;
             Status = "dispatched";
             Comment = ci;
         }

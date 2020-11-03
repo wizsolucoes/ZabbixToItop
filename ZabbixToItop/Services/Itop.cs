@@ -49,8 +49,11 @@ namespace ZabbixToItop.Services
                     }
                 },
                 Urgency = config.urgency, 
-                Impact = config.Impact, 
-                Private_log = new ItemsList
+                Impact = config.Impact
+            };
+
+            if(config.resource_group_name != null){
+                fields.Private_log = new ItemsList
                 {
                     Items = new List<Item>
                     {
@@ -60,8 +63,8 @@ namespace ZabbixToItop.Services
                             Message = "Resource Group: " + config.resource_group_name + ""
                         }
                     }
-                }
-            };
+                }; 
+            }
             
             Ticket ticket = new Ticket
             {
