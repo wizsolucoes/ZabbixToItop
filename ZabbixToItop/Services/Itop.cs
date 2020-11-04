@@ -54,7 +54,8 @@ namespace ZabbixToItop.Services
 
             Console.WriteLine(config.resource_group_name);
 
-            if(config.resource_group_name != null){
+            if(config.resource_group_name != null)
+            {
                 fields.Private_log = new ItemsList
                 {
                     Items = new List<Item>
@@ -102,6 +103,11 @@ namespace ZabbixToItop.Services
             var response = await client.PostAsync(itop_url, requestBody);
             
             var itopResponse = utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
+
+            if (itopResponse.code != 0)
+            {
+                throw new ItopException(itopResponse.message, itopResponse.code);
+            }
 
             return "code:" + itopResponse.code + " message:" + itopResponse.message;
         }

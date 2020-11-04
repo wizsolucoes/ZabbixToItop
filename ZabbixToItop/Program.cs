@@ -20,13 +20,20 @@ namespace ZabbixToItop
                 }
                 else
                 {
-                    Console.WriteLine("Informe a quantidade minima correta de argumentos (7)");
+                    throw new Exception("Informe a quantidade minima correta de argumentos (7)");
                 }
             }
-            catch (System.Exception)
+            catch(ItopException itopException)
             {
-                Console.WriteLine("throwlow");                
+                Teams teams = new Teams(itopException);
+                teams.SendError();
             }
+            catch (Exception exception)
+            {
+                Teams teams = new Teams(exception);
+                teams.SendError();
+            }
+            
         }
 
     }

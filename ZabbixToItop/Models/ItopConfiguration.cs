@@ -25,7 +25,7 @@ namespace ZabbixToItop.Models
                 }
                 else
                 {
-                    throw new Exception("Ci não possui service cadastrado no sistema!");
+                    throw new Exception("Ci " + ci + " não possui service cadastrado no sistema!");
                 }
             }
             else
