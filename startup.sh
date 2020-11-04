@@ -22,5 +22,5 @@ elif [ $LOCAL = $BASE ]; then
     echo "Pulling from main"
     git pull origin main
     echo "Bulding project"
-    dotnet build
+    dotnet build -c Release
 fi
