@@ -17,10 +17,10 @@ namespace ZabbixToItop.Services
 
         public Itop()
         {
-            itop_url = ConfigurationManager.AppSettings["url"];
-            itop_user = ConfigurationManager.AppSettings["auth_user"];
-            itop_pwd = ConfigurationManager.AppSettings["auth_pwd"];
             utils = new Utils();
+            itop_url = utils.GenerateAppConfig().Settings["url"].Value; 
+            itop_user = utils.GenerateAppConfig().Settings["auth_user"].Value;
+            itop_pwd = utils.GenerateAppConfig().Settings["auth_pwd"].Value;
         }
 
         public string GenerateTicket(ItopConfiguration config)

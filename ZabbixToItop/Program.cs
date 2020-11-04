@@ -1,7 +1,7 @@
-﻿using ZabbixToItop.Models;
-using ZabbixToItop.Services;
-using System;
+﻿using ZabbixToItop.Services;
+using ZabbixToItop.Models;
 using System.Threading.Tasks;
+using System;
 
 namespace ZabbixToItop
 {
@@ -16,8 +16,7 @@ namespace ZabbixToItop
                     Itop itopApi = new Itop();
                     ItopConfiguration config = new ItopConfiguration(args);
                     string ticketJson = itopApi.GenerateTicket(config);
-                    Console.WriteLine(ticketJson);
-                    //Console.WriteLine(await itopApi.SaveTicketOnItopAsync(ticketJson));
+                    Console.WriteLine(await itopApi.SaveTicketOnItopAsync(ticketJson));
                 }
                 else
                 {

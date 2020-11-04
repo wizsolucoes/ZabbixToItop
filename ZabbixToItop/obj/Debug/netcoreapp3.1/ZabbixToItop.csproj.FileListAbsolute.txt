@@ -25,7 +25,6 @@ C:\Users\rafaelserafim\source\repos\ZabbixToItop\ZabbixToItop\bin\Debug\netcorea
 C:\Users\rafaelserafim\source\repos\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.1\ZabbixToItop.csproj.CopyComplete
 C:\Users\rafaelserafim\source\repos\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.1\ZabbixToItop.csproj.CoreCompileInputs.cache
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\bin\Debug\netcoreapp3.1\ZabbixToItop.exe
-c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\bin\Debug\netcoreapp3.1\ZabbixToItop.dll.config
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\bin\Debug\netcoreapp3.1\ZabbixToItop.deps.json
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\bin\Debug\netcoreapp3.1\ZabbixToItop.runtimeconfig.json
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\bin\Debug\netcoreapp3.1\ZabbixToItop.runtimeconfig.dev.json
@@ -50,3 +49,4 @@ c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.1\ZabbixToItop.dll
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.1\ZabbixToItop.pdb
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.1\ZabbixToItop.genruntimeconfig.cache
+C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\bin\Debug\netcoreapp3.1\ZabbixToItop.dll.config
