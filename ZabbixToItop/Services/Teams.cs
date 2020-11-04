@@ -31,31 +31,31 @@ namespace ZabbixToItop.Services
                 Sections = new List<Section> {
                     new Section
                     {
-                        ActivityTitle=Message,
-                        ActivitySubtitle=ErrorCode,
-                        Facts=new List<Fact>{
+                        ActivityTitle = Message,
+                        ActivitySubtitle = ErrorCode,
+                        Facts = new List<Fact>{
                             new Fact
                             {
-                                Name="mensagem",
-                                Value=Message
+                                Name = "mensagem",
+                                Value = Message
                             },
                             new Fact
                             {
-                                Name="Quando",
-                                Value= DateTime.Now.ToString("MM/dd/yyyy h:mm tt")
+                                Name = "Quando",
+                                Value = DateTime.Now.ToString("MM/dd/yyyy h:mm tt")
                             },
                             new Fact
                             {
-                                Name="Status",
-                                Value=ErrorCode
+                                Name = "Status",
+                                Value = ErrorCode
                             },
                             new Fact
                             {
-                                Name="Body",
-                                Value= Body
+                                Name ="Body",
+                                Value = Body
                             },
                         },
-                        Markdown=true
+                        Markdown = true
                     }
                 }
             };

@@ -34,7 +34,7 @@ namespace ZabbixToItop.Models
         public string Escalation_flag { get; set; }
         public string Escalation_reason { get; set; }
         public string Resolution_code { get; set; }
-        public List<string> contacts_list { get; set; }
+        public List<string> Contacts_list { get; set; }
         public Caller Caller_id { get; set; }
         public ItemsList Private_log { get; set; }
     }

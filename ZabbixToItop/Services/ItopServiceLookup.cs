@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace ZabbixToItop
 {
-    public class ServiceLookup
+    public class ItopServiceLookup
     {
         public static readonly Dictionary<string, string[]> CiServices = new Dictionary<string,string[]> {
             {"ci1", new string[]{"PageBla.aspx", ""}},

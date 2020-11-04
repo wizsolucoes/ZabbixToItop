@@ -1,26 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
-using ZabbixToItop.Interfaces;
 using ZabbixToItop.Models;
 
 namespace ZabbixToItop.Services
 {
-    public class Itop : IItop
+    public class Itop
     {
-        private string itop_url;
-        private string itop_user;
-        private string itop_pwd;
+        private string Itop_url;
+        private string Itop_user;
+        private string Itop_pwd;
         private readonly Utils utils;
 
         public Itop()
         {
             utils = new Utils();
-            itop_url = utils.GenerateAppConfig().Settings["url"].Value; 
-            itop_user = utils.GenerateAppConfig().Settings["auth_user"].Value;
-            itop_pwd = utils.GenerateAppConfig().Settings["auth_pwd"].Value;
+            Itop_url = utils.GenerateAppConfig().Settings["url"].Value; 
+            Itop_user = utils.GenerateAppConfig().Settings["auth_user"].Value;
+            Itop_pwd = utils.GenerateAppConfig().Settings["auth_pwd"].Value;
         }
 
         public string GenerateTicket(ItopConfiguration config)
@@ -29,32 +27,30 @@ namespace ZabbixToItop.Services
             {
                 Service_id = "SELECT Service WHERE name='" + config.Service_name + "'",
                 Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'",
-                Origin = config.origin,
-                contacts_list = new List<string> { config.team },
-                Team_id = "SELECT Team WHERE name = '" + config.team + "'", 
+                Origin = config.Origin,
+                Contacts_list = new List<string> { config.Team },
+                Team_id = "SELECT Team WHERE name = '" + config.Team + "'", 
                 Caller_id = new Caller
                 {
                     First_name = "Processo",
                     Name = "Automatico"
                 },
-                Description = config.description,
-                Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + config.ci + "'",
-                Title = config.title, 
+                Description = config.Description,
+                Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + config.Ci + "'",
+                Title = config.Title, 
                 Functionalcis_list = new List<Functionalcis>
                 {
                     new Functionalcis
                     {
-                        Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.ci + "'",  
+                        Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.Ci + "'",  
                         Impact_code = "manual"
                     }
                 },
-                Urgency = config.urgency, 
+                Urgency = config.Urgency, 
                 Impact = config.Impact
             };
 
-            Console.WriteLine(config.resource_group_name);
-
-            if(config.resource_group_name != null)
+            if(config.Resource_group_name != null)
             {
                 fields.Private_log = new ItemsList
                 {
@@ -63,7 +59,7 @@ namespace ZabbixToItop.Services
                         new Item
                         {
                             Date =  DateTime.Now,
-                            Message = "Resource Group: " + config.resource_group_name + ""
+                            Message = "Resource Group: " + config.Resource_group_name + ""
                         }
                     }
                 }; 
@@ -93,14 +89,14 @@ namespace ZabbixToItop.Services
 
             var values = new Dictionary<string, string>
             {
-                { "auth_pwd", itop_pwd },
-                { "auth_user", itop_user },
+                { "auth_pwd", Itop_pwd },
+                { "auth_user", Itop_user },
                 { "json_data", jsonString }
             };
 
             var requestBody = new FormUrlEncodedContent(values);
                     
-            var response = await client.PostAsync(itop_url, requestBody);
+            var response = await client.PostAsync(Itop_url, requestBody);
             
             var itopResponse = utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
 
@@ -108,7 +104,7 @@ namespace ZabbixToItop.Services
             {
                 throw new ItopException(itopResponse.message, itopResponse.code);
             }
-
+            
             return "code:" + itopResponse.code + " message:" + itopResponse.message;
         }
     }
