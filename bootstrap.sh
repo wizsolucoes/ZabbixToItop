@@ -1,6 +1,6 @@
 #!/bin/bash
 
-path=./ZabbixToItop/bin/Debug/netcoreapp3.1/ZabbixToItop.dll
+path=./ZabbixToItop/bin/Release/netcoreapp3.1/ZabbixToItop.dll
 
 if [ -z "${10}" ]
 then
