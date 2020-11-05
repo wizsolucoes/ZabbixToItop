@@ -12,60 +12,8 @@ namespace ZabbixToItop.Services
 
         public string GenerateTicket(ItopConfiguration config)
         {
-            TicketFields fields = new TicketFields
-            {
-                Service_id = "SELECT Service WHERE name='" + config.Service_name + "'",
-                Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'",
-                Origin = config.Origin,
-                Contacts_list = new List<string> { config.Team },
-                Team_id = "SELECT Team WHERE name = '" + config.Team + "'", 
-                Caller_id = new Caller
-                {
-                    First_name = "Processo",
-                    Name = "Automatico"
-                },
-                Description = config.Description,
-                Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + config.Ci + "'",
-                Title = config.Title, 
-                Functionalcis_list = new List<Functionalcis>
-                {
-                    new Functionalcis
-                    {
-                        Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.Ci + "'",  
-                        Impact_code = "manual"
-                    }
-                },
-                Urgency = config.Urgency, 
-                Impact = config.Impact
-            };
-
-            if (config.Service_name == null)
-            {
-                //pesquisar dentro do itop pelo ci
-                fields.Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '"+ config.Ci + "'";
-                fields.Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='Microsoft Office Support' AND Service.name='Software'";
-            }
-            else
-            {
-                fields.Service_id = "SELECT Service WHERE name='" + config.Service_name + "'";
-                fields.Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'";
-            }
-
-            if(config.Resource_group_name != null)
-            {
-                fields.Private_log = new ItemsList
-                {
-                    Items = new List<Item>
-                    {
-                        new Item
-                        {
-                            Date =  DateTime.Now,
-                            Message = "Resource Group: " + config.Resource_group_name + ""
-                        }
-                    }
-                }; 
-            }
-            
+            TicketFields fields = new TicketFields(config);
+           
             Ticket ticket = new Ticket
             {
                 Class = config.Class, 
