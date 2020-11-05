@@ -39,7 +39,7 @@ namespace ZabbixToItopTests
             ticketJson = ticketJson.Replace(System.Environment.NewLine, "");
             ticketJson = new Regex("[ ]{2,}", RegexOptions.None).Replace(ticketJson, " ");
 
-            string expectedJson = "{ \"operation\": \"core/create\", \"class\": \"UserRequest\", \"comment\": \"Ticket commentary\", \"output_fields\": \"id\", \"fields\": { \"org_id\": 1, \"title\": \"Ticket title teste\", \"description\": \"Ticket description\", \"functionalcis_list\": [ { \"functionalci_id\": 1, \"impact_code\": \"manual\" } ] }}";
+            string expectedJson = "{ \"operation\": \"core/create\", \"class\": \"UserRequest\", \"comment\": \"Ticket commentary\", \"output_fields\": \"id\", \"fields\": { \"org_id\": \"1\", \"title\": \"Ticket title teste\", \"description\": \"Ticket description\", \"functionalcis_list\": [ { \"functionalci_id\": \"1\", \"impact_code\": \"manual\" } ] }}";
 
             Assert.AreEqual(expectedJson, ticketJson);
         }

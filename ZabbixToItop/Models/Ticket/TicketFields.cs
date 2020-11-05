@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace ZabbixToItop.Models
 {
+    [ExcludeFromCodeCoverage]
     public class TicketFields
     {
-        public TicketFields()
-        {
-        }
+        public TicketFields() { }
 
         public TicketFields(ItopConfiguration config)
         {

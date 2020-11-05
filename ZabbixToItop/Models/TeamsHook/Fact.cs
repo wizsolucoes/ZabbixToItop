@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace ZabbixToItop.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Fact
     {
         public Fact(){}

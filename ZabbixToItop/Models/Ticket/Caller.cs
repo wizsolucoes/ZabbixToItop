@@ -1,5 +1,8 @@
-﻿namespace ZabbixToItop.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace ZabbixToItop.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Caller
     {
         public Caller(){}

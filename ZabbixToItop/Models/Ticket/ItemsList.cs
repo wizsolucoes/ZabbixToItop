@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ZabbixToItop.Models
 {
+    [ExcludeFromCodeCoverage]
     public class ItemsList
     {
 

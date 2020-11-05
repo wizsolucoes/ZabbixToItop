@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace ZabbixToItop.Models
 {
+    [ExcludeFromCodeCoverage]
     public class TeamsHook
     {
         public TeamsHook(){}

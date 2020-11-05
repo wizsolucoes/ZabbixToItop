@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ZabbixToItopTests
 {
-    class ItopTests
+    public class ItopTests
     {
     }
 }
