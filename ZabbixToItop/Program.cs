@@ -26,12 +26,12 @@ namespace ZabbixToItop
             catch(ItopException itopException)
             {
                 Teams teams = new Teams(itopException);
-                teams.SendError();
+                await teams.SendErrorAsync();
             }
             catch (Exception exception)
             {
                 Teams teams = new Teams(exception);
-                teams.SendError();
+                await teams.SendErrorAsync();
             }
             
         }

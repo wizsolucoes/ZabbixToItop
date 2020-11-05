@@ -1,6 +1,10 @@
+using System.Net.Http;
 using System.Collections.Generic;
 using ZabbixToItop.Models;
 using System;
+using System.Threading.Tasks;
+using System.Net;
+using System.IO;
 
 namespace ZabbixToItop.Services
 {
@@ -22,7 +26,7 @@ namespace ZabbixToItop.Services
             ErrorCode = exception.ErrorCode.ToString();
             Body = exception.ToString();
         }
-        public void SendError()
+        public async Task SendErrorAsync()
         {
             TeamsHook teamsHook = new TeamsHook
             {
@@ -51,7 +55,12 @@ namespace ZabbixToItop.Services
                             },
                             new Fact
                             {
-                                Name ="Body",
+                                Name = "Origem",
+                                Value = "Zabbix" 
+                            },
+                            new Fact
+                            {
+                                Name = "Body",
                                 Value = Body
                             },
                         },
@@ -59,6 +68,23 @@ namespace ZabbixToItop.Services
                     }
                 }
             };
+
+            /*var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://url");
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                var json = Utils.ObjectToJson(teamsHook);
+
+                streamWriter.Write(json);
+            }
+
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }*/
 
             var json = Utils.ObjectToJson(teamsHook);
             Console.WriteLine(json);

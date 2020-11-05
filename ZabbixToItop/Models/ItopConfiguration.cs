@@ -14,28 +14,9 @@ namespace ZabbixToItop.Models
             Team = args[5];
             Title = Ci;
             Impact = args[6];
-
-            if (8 > args.Length)
-            {
-                if (ItopServiceLookup.CiServices.ContainsKey(Ci))
-                {
-                    var serviceLookup = ItopServiceLookup.CiServices[Ci];
-                    Service_name = serviceLookup[0];
-                    Service_subcategory_name = serviceLookup[1];
-                }
-                else
-                {
-                    throw new Exception("Ci " + Ci + " não possui service cadastrado no sistema!");
-                }
-            }
-            else
-            {
-                Service_name = args[7];
-                Service_subcategory_name = args[8];
-            }
-            
-            Resource_group_name = 10 > args.Length ? null : args[9] == "" ? null : args[9];
-
+            Service_name = args.Length < 8 ? null : args[7] == "" ? null : args[7];
+            Service_subcategory_name = args.Length < 8 ? null : args[8] == "" ? null : args[8];
+            Resource_group_name = args.Length < 10 ? null : args[9] == "" ? null : args[9];
             Status = "dispatched";
             Comment = Ci;
         }

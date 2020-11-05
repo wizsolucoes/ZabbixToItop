@@ -8,16 +8,7 @@ namespace ZabbixToItop.Services
 {
     public class Itop
     {
-        private string Itop_url;
-        private string Itop_user;
-        private string Itop_pwd;
-
-        public Itop()
-        {
-            Itop_url = Utils.GenerateAppConfig().Settings["url"].Value; 
-            Itop_user = Utils.GenerateAppConfig().Settings["auth_user"].Value;
-            Itop_pwd = Utils.GenerateAppConfig().Settings["auth_pwd"].Value;
-        }
+        public Itop() {}
 
         public string GenerateTicket(ItopConfiguration config)
         {
@@ -47,6 +38,18 @@ namespace ZabbixToItop.Services
                 Urgency = config.Urgency, 
                 Impact = config.Impact
             };
+
+            if (config.Service_name == null)
+            {
+                //pesquisar dentro do itop pelo ci
+                fields.Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '"+ config.Ci + "'";
+                fields.Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='Microsoft Office Support' AND Service.name='Software'";
+            }
+            else
+            {
+                fields.Service_id = "SELECT Service WHERE name='" + config.Service_name + "'";
+                fields.Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'";
+            }
 
             if(config.Resource_group_name != null)
             {
@@ -78,6 +81,10 @@ namespace ZabbixToItop.Services
 
         public async Task<string> SaveTicketOnItopAsync(string jsonString)
         {
+            string Itop_url = Utils.GenerateAppConfig().Settings["url"].Value; 
+            string Itop_user = Utils.GenerateAppConfig().Settings["auth_user"].Value;
+            string Itop_pwd = Utils.GenerateAppConfig().Settings["auth_pwd"].Value;
+
             var httpClientHandler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }

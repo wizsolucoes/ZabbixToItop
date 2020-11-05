@@ -35,7 +35,7 @@ namespace ZabbixToItopTests
 
             Utils utils = new Utils();
 
-            string ticketJson = utils.ObjectToJson(ticket);
+            string ticketJson = Utils.ObjectToJson(ticket);
             ticketJson = ticketJson.Replace(System.Environment.NewLine, "");
             ticketJson = new Regex("[ ]{2,}", RegexOptions.None).Replace(ticketJson, " ");
 
@@ -51,7 +51,7 @@ namespace ZabbixToItopTests
 
             Utils utils = new Utils();
 
-            string ticketJson = utils.ObjectToJson(ticket);
+            string ticketJson = Utils.ObjectToJson(ticket);
             ticketJson = ticketJson.Replace(System.Environment.NewLine, "");
             ticketJson = new Regex("[ ]{2,}", RegexOptions.None).Replace(ticketJson, " ");
 
@@ -67,7 +67,7 @@ namespace ZabbixToItopTests
 
             Utils utils = new Utils();
 
-            ItopResponse utilsResponse = utils.FormatItopResponse(successItopMessage);
+            ItopResponse utilsResponse = Utils.FormatItopResponse(successItopMessage);
 
             Assert.AreEqual(utilsResponse.code, 0);
             Assert.AreEqual(utilsResponse.message, "created");
@@ -80,7 +80,7 @@ namespace ZabbixToItopTests
 
             Utils utils = new Utils();
 
-            ItopResponse utilsResponse = utils.FormatItopResponse(successItopMessage);
+            ItopResponse utilsResponse = Utils.FormatItopResponse(successItopMessage);
 
             Assert.AreEqual(utilsResponse.code, 100);
             Assert.AreEqual(utilsResponse.message, "Error: Missing parameter 'operation'");
