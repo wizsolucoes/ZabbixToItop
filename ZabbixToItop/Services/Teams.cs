@@ -60,8 +60,7 @@ namespace ZabbixToItop.Services
                 }
             };
 
-            Utils utils = new Utils();
-            var json = utils.ObjectToJson(teamsHook);
+            var json = Utils.ObjectToJson(teamsHook);
             Console.WriteLine(json);
         }
     }

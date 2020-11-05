@@ -11,14 +11,12 @@ namespace ZabbixToItop.Services
         private string Itop_url;
         private string Itop_user;
         private string Itop_pwd;
-        private readonly Utils utils;
 
         public Itop()
         {
-            utils = new Utils();
-            Itop_url = utils.GenerateAppConfig().Settings["url"].Value; 
-            Itop_user = utils.GenerateAppConfig().Settings["auth_user"].Value;
-            Itop_pwd = utils.GenerateAppConfig().Settings["auth_pwd"].Value;
+            Itop_url = Utils.GenerateAppConfig().Settings["url"].Value; 
+            Itop_user = Utils.GenerateAppConfig().Settings["auth_user"].Value;
+            Itop_pwd = Utils.GenerateAppConfig().Settings["auth_pwd"].Value;
         }
 
         public string GenerateTicket(ItopConfiguration config)
@@ -75,7 +73,7 @@ namespace ZabbixToItop.Services
                 Fields = fields
             };
 
-            return utils.ObjectToJson(ticket);
+            return Utils.ObjectToJson(ticket);
         }
 
         public async Task<string> SaveTicketOnItopAsync(string jsonString)
@@ -98,7 +96,7 @@ namespace ZabbixToItop.Services
                     
             var response = await client.PostAsync(Itop_url, requestBody);
             
-            var itopResponse = utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
+            var itopResponse = Utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
 
             if (itopResponse.code != 0)
             {
