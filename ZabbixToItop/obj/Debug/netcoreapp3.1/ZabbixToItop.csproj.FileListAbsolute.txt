@@ -49,4 +49,3 @@ c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.1\ZabbixToItop.dll
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.1\ZabbixToItop.pdb
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\obj\Debug\netcoreapp3.1\ZabbixToItop.genruntimeconfig.cache
-C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItop\bin\Debug\netcoreapp3.1\ZabbixToItop.dll.config

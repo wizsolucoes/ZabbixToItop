@@ -207,7 +207,6 @@ c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcore
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\ZabbixToItop.dll
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\ZabbixToItop.pdb
-c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\ZabbixToItop.dll.config
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.csprojAssemblyReference.cache
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.AssemblyInfoInputs.cache
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.AssemblyInfo.cs

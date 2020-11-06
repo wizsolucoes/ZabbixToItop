@@ -10,7 +10,7 @@ namespace ZabbixToItop.Services
     {
         public Itop() {}
 
-        public string GenerateTicket(ItopConfiguration config)
+        public Ticket GenerateTicket(ItopConfiguration config)
         {
             TicketFields fields = new TicketFields(config);
            
@@ -24,7 +24,7 @@ namespace ZabbixToItop.Services
                 Fields = fields
             };
 
-            return Utils.ObjectToJson(ticket);
+            return ticket;
         }
 
         public async Task<string> SaveTicketOnItopAsync(string jsonString)
