@@ -1,25 +1,14 @@
 
 # Wiz ZabbixToItop
-Aplicativo desenvolvido para salvar tickets no Itop.
+Aplicativo desenvolvido para salvar novos tickets no Itop.
 
 ## Uso
+Para execução o projeto espera que três variáveis de ambiente estejam definidas {url} {auth_user}{auth_pwd}, 
+
 ```bash
-dotnet run "arg0"  "arg1"  "arg2"  "arg3"  "arg4"  "arg5"  "arg6"  "arg7"  "arg8"  "arg9"
+dotnet run "*{$Class}" "*{$Description}" "*{$Origin}" "*{$CI_HOST}" "*{$Urgency}" "*{$Team}" "*{$Impact}" "{$Service_name}" "{$Service_subcategory_name}" "{$Resource_group_name}"
 ```
-
-Abaixo estão listados os campos correspondentes no itop para cada arg:
 ***Argumento obrigatório**
-
-arg0* = Class
-arg1* = Description
-arg2* = Origin
-arg3* = CI/HOST
-arg4* = Urgency
-arg5* = Team
-arg6* = Impact
-arg7 = Service name
-arg8 = Service subcategory name
-arg9 = Resource group name
 
 ## Exemplos de uso
 
@@ -39,35 +28,14 @@ dotnet run "UserRequest"  "Description"  "monitoring"  "Cluster1"  "4"  "Helpdes
 ```
 
 ## Build
-Para fazer o build do projeto basta rodar o comando abaixo
 ```bash
 dotnet build
 ```
-Para fazer o build do projeto para ambiente de produção basta rodar este outro comando
-```bash
-dotnet build -c Release
-```
 
-## Configuração da conexão com o Itop
-A conexão com o Itop do ambiente de desenvolvimento e produção devem ser definidas no arquivo App.config como mostrado abaixo:
-```xml
-<?xml version="1.0"?>
-<configuration>
-	<configSections>
-		<section  name="Debug"  type="System.Configuration.AppSettingsSection"  />
-		<section  name="Release"  type="System.Configuration.AppSettingsSection"/>
-	</configSections>
-	<Release>
-		<add  key="url"  value="url release"  />
-		<add  key="auth_pwd"  value="pwd release"  />
-		<add  key="auth_user"  value="user release"  />
-	</Release>
-	<Debug>
-		<add  key="url"  value="http://localhost:8000/webservices/rest.php?version=1.3"  />
-		<add  key="auth_pwd"  value="Admin123_"  />
-		<add  key="auth_user"  value="admin7"  />
-	</Debug>
-</configuration>
+## Configuração de chaves secretas
+A configuração das chaves deverão ser feitas no ZabbixToItop-template.conf, após definir as chaves basta retirar o '-template' do nome do arquivo e executr.
+```bash
+source ZabbixToItop.conf 
 ```
 
 ## Configuração dos args e setar valores padrão
