@@ -29,9 +29,10 @@ namespace ZabbixToItop.Services
 
         public async Task<string> SaveTicketOnItopAsync(string jsonString)
         {
-            string Itop_url = Utils.GenerateAppConfig().Settings["url"].Value; 
-            string Itop_user = Utils.GenerateAppConfig().Settings["auth_user"].Value;
-            string Itop_pwd = Utils.GenerateAppConfig().Settings["auth_pwd"].Value;
+            
+            string Itop_url = Environment.GetEnvironmentVariable("url"); 
+            string Itop_user = Environment.GetEnvironmentVariable("auth_user");
+            string Itop_pwd = Environment.GetEnvironmentVariable("auth_pwd"); 
 
             var httpClientHandler = new HttpClientHandler
             {
