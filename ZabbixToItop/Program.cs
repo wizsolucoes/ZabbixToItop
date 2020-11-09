@@ -1,4 +1,7 @@
-﻿using System.Net.Http;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Net.Http;
 using ZabbixToItop.Services;
 using ZabbixToItop.Models;
 using System.Threading.Tasks;
@@ -14,10 +17,9 @@ namespace ZabbixToItop
             {
                 if (args.Length >= 7)
                 {
-                    Itop itopApi = new Itop();
-                    ItopConfiguration config = new ItopConfiguration(args);
-                    string ticketJson = Utils.ObjectToJson(itopApi.GenerateTicket(config));
-                    await itopApi.SaveTicketOnItopAsync(ticketJson, args);
+                    var config = new ItopConfiguration(args);
+                    string ticketJson = Utils.ObjectToJson(await Itop.GenerateTicketAsync(config));
+                    await Itop.SaveTicketOnItopAsync(ticketJson, args);
                 }
                 else
                 {

@@ -69,14 +69,13 @@ namespace ZabbixToItop.Services
                 }
             };
 
-            /*var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://outlook.office.com/webhook/33621ba1-f736-4a59-aeef-9a2affc3b2bb@7c416a2f-a987-4337-bb0a-94e57c1f32e7/IncomingWebhook/5d28bf49ab734814954632eda45eb568/4070e9f8-9676-4659-bfc4-2138659f8145");
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://outlook.office.com/webhook/33621ba1-f736-4a59-aeef-9a2affc3b2bb@7c416a2f-a987-4337-bb0a-94e57c1f32e7/IncomingWebhook/5d28bf49ab734814954632eda45eb568/4070e9f8-9676-4659-bfc4-2138659f8145");
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";
 
             using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
             {
                 var json = Utils.ObjectToJson(teamsHook);
-
                 streamWriter.Write(json);
             }
 
@@ -84,10 +83,8 @@ namespace ZabbixToItop.Services
             using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
             {
                 var result = streamReader.ReadToEnd();
-            }*/
+            }
 
-            var json = Utils.ObjectToJson(teamsHook);
-            Console.WriteLine(json);
         }
     }
 }

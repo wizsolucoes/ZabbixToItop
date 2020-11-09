@@ -17,7 +17,7 @@ namespace ZabbixToItopTests
             string[] args = new string[] { "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
             Itop itopApi = new Itop();
             ItopConfiguration config = new ItopConfiguration(args);
-            Ticket ticketJson = itopApi.GenerateTicket(config);
+            Ticket ticketJson = await itopApi.GenerateTicketAsync(config);
             Assert.AreEqual(ticketJson.Class, "UserRequest");
             Assert.AreEqual(ticketJson.Fields.Service_id, "SELECT Service WHERE name='Software'");
             Assert.AreEqual(ticketJson.Fields.Functionalcis_list[0].Functionalci_id, "SELECT FunctionalCI WHERE name='Cluster1'");

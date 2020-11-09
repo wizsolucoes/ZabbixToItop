@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Text;
+using ZabbixToItop.Services;
 
 namespace ZabbixToItop.Models
 {
@@ -12,8 +11,6 @@ namespace ZabbixToItop.Models
 
         public TicketFields(ItopConfiguration config)
         {
-            Service_id = "SELECT Service WHERE name='" + config.Service_name + "'";
-            Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'";
             Origin = config.Origin;
             Contacts_list = new List<string> { config.Team };
             Team_id = "SELECT Team WHERE name = '" + config.Team + "'";
@@ -35,11 +32,14 @@ namespace ZabbixToItop.Models
             if (config.Service_name == null)
             {
                 Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '" + config.Ci + "'";
-                Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='Microsoft Office Support' AND Service.name='Software'";
             }
             else
             {
                 Service_id = "SELECT Service WHERE name='" + config.Service_name + "'";
+            }
+            
+            if(config.Service_subcategory_name != null)
+            {
                 Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'";
             }
 

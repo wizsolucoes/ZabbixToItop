@@ -15,7 +15,7 @@ namespace ZabbixToItop.Models
             Title = Ci;
             Impact = args[9];
             Service_name = args.Length < 11 ? null : args[10] == "" ? null : args[10];
-            Service_subcategory_name = args.Length < 11 ? null : args[11] == "" ? null : args[11];
+            Service_subcategory_name = args.Length < 12 ? null : args[11] == "" ? null : args[11];
             Resource_group_name = args.Length < 13 ? null : args[12] == "" ? null : args[12];
             Status = "dispatched";
             Comment = Ci;
