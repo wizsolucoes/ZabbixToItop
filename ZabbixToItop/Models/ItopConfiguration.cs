@@ -6,17 +6,17 @@ namespace ZabbixToItop.Models
     {
         public ItopConfiguration(string[] args)
         {
-            Class = args[0];
-            Description = args[1];
-            Origin = args[2];
-            Ci = args[3];
-            Urgency = args[4];
-            Team = args[5];
+            Class = args[3];
+            Description = args[4];
+            Origin = args[5];
+            Ci = args[6];
+            Urgency = args[7];
+            Team = args[8];
             Title = Ci;
-            Impact = args[6];
-            Service_name = args.Length < 8 ? null : args[7] == "" ? null : args[7];
-            Service_subcategory_name = args.Length < 8 ? null : args[8] == "" ? null : args[8];
-            Resource_group_name = args.Length < 10 ? null : args[9] == "" ? null : args[9];
+            Impact = args[9];
+            Service_name = args.Length < 11 ? null : args[10] == "" ? null : args[10];
+            Service_subcategory_name = args.Length < 11 ? null : args[11] == "" ? null : args[11];
+            Resource_group_name = args.Length < 13 ? null : args[12] == "" ? null : args[12];
             Status = "dispatched";
             Comment = Ci;
         }

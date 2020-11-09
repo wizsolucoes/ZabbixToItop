@@ -8,22 +8,6 @@ namespace ZabbixToItop
 {
     class Program
     {
-        public static HttpClient client { get; set; }
-        public Program()
-        {
-            var httpClientHandler = new HttpClientHandler
-            {
-                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
-            };
-
-            client = new HttpClient(httpClientHandler);
-        }
-
-        public Program(HttpClient clientMock)
-        {
-            client = clientMock;
-        }
-
         public static async Task Main(string[] args)
         {
             try
@@ -33,7 +17,7 @@ namespace ZabbixToItop
                     Itop itopApi = new Itop();
                     ItopConfiguration config = new ItopConfiguration(args);
                     string ticketJson = Utils.ObjectToJson(itopApi.GenerateTicket(config));
-                    await itopApi.SaveTicketOnItopAsync(ticketJson, client);
+                    await itopApi.SaveTicketOnItopAsync(ticketJson, args);
                 }
                 else
                 {

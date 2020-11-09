@@ -27,11 +27,18 @@ namespace ZabbixToItop.Services
             return ticket;
         }
 
-        public async Task<string> SaveTicketOnItopAsync(string jsonString, HttpClient client)
+        public async Task<string> SaveTicketOnItopAsync(string jsonString, string[] args)
         {
-            string Itop_url = Environment.GetEnvironmentVariable("url"); 
-            string Itop_user = Environment.GetEnvironmentVariable("auth_user");
-            string Itop_pwd = Environment.GetEnvironmentVariable("auth_pwd"); 
+            var httpClientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+            };
+
+            var client = new HttpClient(httpClientHandler);
+
+            string Itop_url = args[0]; 
+            string Itop_user = args[1];
+            string Itop_pwd = args[2]; 
 
             var values = new Dictionary<string, string>
             {
