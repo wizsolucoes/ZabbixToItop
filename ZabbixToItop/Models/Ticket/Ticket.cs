@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 
 namespace ZabbixToItop.Models
 {
+    [ExcludeFromCodeCoverage]
     public class Ticket
     {
-        public Ticket()
-        {
-
-        }
+        public Ticket() {}
         public Ticket(string operation, string @class, string comment, string output_fields, TicketFields fields)
         {
             this.Operation = operation;

@@ -1,71 +1,72 @@
-﻿using System;
+﻿using System.Text.RegularExpressions;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Net.Http;
 using System.Threading.Tasks;
-using ZabbixToItop.Interfaces;
 using ZabbixToItop.Models;
 
 namespace ZabbixToItop.Services
 {
-    public class Itop : IItop
+    public class Itop
     {
-        private string itop_url;
-        private string itop_user;
-        private string itop_pwd;
-        private readonly Utils utils;
+        public Itop() { }
 
-        public Itop()
+        public static async Task<Ticket> GenerateTicketAsync(ItopConfiguration config)
         {
-            itop_url = ConfigurationManager.AppSettings["url"];
-            itop_user = ConfigurationManager.AppSettings["auth_user"];
-            itop_pwd = ConfigurationManager.AppSettings["auth_pwd"];
-            utils = new Utils();
-        }
-
-        public string GenerateTicket(ItopConfiguration config)
-        {
-            TicketFields fields = new TicketFields
-            {
-                Service_id = "SELECT Service WHERE name='" + config.Service_name + "'",
-                Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'",
-                Origin = config.Current_origin,
-                contacts_list = new List<string> { config.Current_team },
-                Team_id = "SELECT Team WHERE name = '" + config.Current_team + "'", 
-                Caller_id = new Caller
-                {
-                    First_name = "Processo",
-                    Name = "Automatico"
-                },
-                Description = config.Current_description,
-                Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + config.Current_resource_name + "'",
-                Title = config.Current_title, 
-                Functionalcis_list = new List<Functionalcis>
-                {
-                    new Functionalcis
-                    {
-                        Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.Current_resource_name + "'", 
-                        Impact_code = "manual"
-                    }
-                },
-                Urgency = config.Current_urgency, 
-                Impact = config.Impact
-            };
+            TicketFields fields = new TicketFields(config);
             
+            if(config.Service_subcategory_name == null)
+            {
+                fields.Servicesubcategory_id = await GetServiceSubcategoryByCIAsync(config.Ci);
+            }
+
             Ticket ticket = new Ticket
             {
-                Class = config.Class, 
+                Class = config.Class,
                 Status = config.Status,
-                Comment = config.Comment, 
+                Comment = config.Comment,
                 Operation = "core/create",
                 Output_fields = "id",
                 Fields = fields
             };
 
-            return utils.ObjectToJson(ticket);
+            return ticket;
         }
 
-        public async Task<string> SaveTicketOnItopAsync(string jsonString)
+        public static async Task<string> SaveTicketOnItopAsync(string jsonString, string[] args)
+        {
+            var httpClientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+            };
+
+            var client = new HttpClient(httpClientHandler);
+
+            string Itop_url = args[0];
+            string Itop_user = args[1];
+            string Itop_pwd = args[2];
+
+            var values = new Dictionary<string, string>
+            {
+                { "auth_pwd", Itop_pwd },
+                { "auth_user", Itop_user },
+                { "json_data", jsonString }
+            };
+
+            var requestBody = new FormUrlEncodedContent(values);
+
+            var response = await client.PostAsync(Itop_url, requestBody);
+
+            var itopResponse = Utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
+           
+            if (itopResponse.code != 0)
+            {
+                throw new ItopException(itopResponse.message, itopResponse.code);
+            }
+
+            return "code:" + itopResponse.code + " message:" + itopResponse.message;
+        }
+
+        public static async Task<string> GetServiceSubcategoryByCIAsync(string ci)
         {
             var httpClientHandler = new HttpClientHandler
             {
@@ -75,19 +76,25 @@ namespace ZabbixToItop.Services
             var client = new HttpClient(httpClientHandler);
 
             var values = new Dictionary<string, string>
-            {
-                { "auth_pwd", itop_pwd },
-                { "auth_user", itop_user },
-                { "json_data", jsonString }
-            };
+                    {
+                        { "auth_pwd", "Admin123_" },
+                        { "auth_user", "admin7" },
+                        { "json_data", "{ \"operation\": \"core/get\", "+
+                                        "\"class\": \"Person\", "+
+                                        "\"key\": \"SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = Service.id WHERE functionalci_id_friendlyname = 'TesteFunctionalCI Server3' AND request_type = 'incident'\", "+
+                                        "\"output_fields\": \"friendlyname, email\" }"
+                        }
+                    };
 
             var requestBody = new FormUrlEncodedContent(values);
-                    
-            var response = await client.PostAsync(itop_url, requestBody);
             
-            var itopResponse = utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
-
-            return "code:" + itopResponse.code + " message:" + itopResponse.message;
+            var response = await client.PostAsync("http://localhost:8000/webservices/rest.php?version=1.3", requestBody);
+            
+            var itopResponse = await response.Content.ReadAsStringAsync();
+            
+            var serviceSubcategoryId = Regex.Match(itopResponse, "\"id\":\"(.+?)\"").Groups[1].Value;
+            
+            return "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='" + serviceSubcategoryId + "'";
         }
     }
 }

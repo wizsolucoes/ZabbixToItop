@@ -1,7 +1,11 @@
-﻿using ZabbixToItop.Models;
+﻿using System.Linq;
+using System.Text.RegularExpressions;
+using System.Collections.Generic;
+using System.Net.Http;
 using ZabbixToItop.Services;
-using System;
+using ZabbixToItop.Models;
 using System.Threading.Tasks;
+using System;
 
 namespace ZabbixToItop
 {
@@ -9,17 +13,30 @@ namespace ZabbixToItop
     {
         public static async Task Main(string[] args)
         {
-            if (args.Length == 10)
+            try
             {
-                Itop itopApi = new Itop();
-                ItopConfiguration config = new ItopConfiguration(args);
-                string ticketJson = itopApi.GenerateTicket(config);
-                Console.WriteLine(await itopApi.SaveTicketOnItopAsync(ticketJson));
+                if (args.Length >= 7)
+                {
+                    var config = new ItopConfiguration(args);
+                    string ticketJson = Utils.ObjectToJson(await Itop.GenerateTicketAsync(config));
+                    await Itop.SaveTicketOnItopAsync(ticketJson, args);
+                }
+                else
+                {
+                    throw new Exception("Informe a quantidade minima correta de argumentos (7)");
+                }
             }
-            else
+            catch (ItopException itopException)
             {
-                Console.WriteLine("Informe a quantidade correta de argumentos (10)");
+                Teams teams = new Teams(itopException);
+                await teams.SendErrorAsync();
             }
+            catch (Exception exception)
+            {
+                Teams teams = new Teams(exception);
+                await teams.SendErrorAsync();
+            }
+
         }
 
     }

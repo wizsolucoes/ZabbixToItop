@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "oQyOCtfTkM2ftu6OE/U6daNpi99PJHAtTzv5FaLal6vmj+66CDcvAfeNK7IHRlAu+3ZH9u5Zl+bZF6ae4ESZPA==",
+  "dgSpecHash": "Snw1qBi2EoRQf+bFORAIjaOXvMRij6L40oGZmSmz+xqkAONFuko3r7t0Y+HdcN5LO2op+I9l4OGmnGRR4r8XpQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\rafaelserafim\\source\\repos\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
+  "projectFilePath": "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rafaelserafim\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\rafaelserafim\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",

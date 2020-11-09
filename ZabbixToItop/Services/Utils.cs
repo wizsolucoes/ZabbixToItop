@@ -1,15 +1,14 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Reflection;
+using System;
 using System.Text.Json;
 using ZabbixToItop.Models;
-using System.Threading.Tasks;
-using ZabbixToItop.Interfaces;
+using System.Configuration;
 
 namespace ZabbixToItop.Services
 {
-    public class Utils : IUtils
+    public class Utils 
     {
-        public string ObjectToJson(Object obj)
+        public static string ObjectToJson(Object obj)
         {
             JsonSerializerOptions serializeOptions = new JsonSerializerOptions
             {
@@ -20,7 +19,7 @@ namespace ZabbixToItop.Services
             return JsonSerializer.Serialize(obj, serializeOptions);
         }
 
-        public ItopResponse FormatItopResponse(string response)
+        public static ItopResponse FormatItopResponse(string response)
         {
             var itopResponse = JsonSerializer.Deserialize<ItopResponse>(response);
 
@@ -28,5 +27,6 @@ namespace ZabbixToItop.Services
 
             return itopResponse;
         }
+
     }
 }

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ZabbixToItop.Models
 {
@@ -8,32 +6,31 @@ namespace ZabbixToItop.Models
     {
         public ItopConfiguration(string[] args)
         {
-            Class = args[0];
-            Current_description = args[1];
-            Current_origin = args[2];
-            //retirar
-            Current_resource_group_name = args[3];
-            Current_resource_name = args[4];
-            Current_urgency = args[5];
-            Current_team = args[6];
-            Current_title = Current_resource_name;
-            Impact = args[7];
-            Service_name = args[8];
-            Service_subcategory_name = args[9];
+            Class = args[3];
+            Description = args[4];
+            Origin = args[5];
+            Ci = args[6];
+            Urgency = args[7];
+            Team = args[8];
+            Title = Ci;
+            Impact = args[9];
+            Service_name = args.Length < 11 ? null : args[10] == "" ? null : args[10];
+            Service_subcategory_name = args.Length < 12 ? null : args[11] == "" ? null : args[11];
+            Resource_group_name = args.Length < 13 ? null : args[12] == "" ? null : args[12];
             Status = "dispatched";
-            Comment = Current_resource_name;
+            Comment = Ci;
         }
 
         public string Service_name { get; set; } 
         public string Service_subcategory_name { get; set; } 
-        public string Current_origin { get; set; } 
-        public string Current_team { get; set; } 
-        public string Current_description { get; set; } 
-        public string Current_resource_name { get; set; } 
-        public string Current_title { get; set; } 
-        public string Current_urgency { get; set; } 
+        public string Origin { get; set; } 
+        public string Team { get; set; } 
+        public string Description { get; set; } 
+        public string Ci { get; set; } 
+        public string Title { get; set; } 
+        public string Urgency { get; set; } 
         public string Impact { get; set; } 
-        public string Current_resource_group_name { get; set; } 
+        public string Resource_group_name { get; set; } 
         public string @Class { get; set; } 
         public string Status { get; set; }
         public string Comment { get; set; }
