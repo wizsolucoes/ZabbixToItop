@@ -13,6 +13,7 @@ namespace ZabbixToItop.Services
         private string Message { get; set; }
         private string ErrorCode { get; set; }
         private string Body { get; set; }
+        
         public Teams(Exception exception)
         {
             Message = exception.Message;
@@ -26,7 +27,7 @@ namespace ZabbixToItop.Services
             ErrorCode = exception.ErrorCode.ToString();
             Body = exception.ToString();
         }
-        public async Task SendErrorAsync()
+        public void SendError()
         {
             TeamsHook teamsHook = new TeamsHook
             {

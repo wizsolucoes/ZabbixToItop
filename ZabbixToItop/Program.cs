@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Text.RegularExpressions;
-using System.Collections.Generic;
-using System.Net.Http;
-using ZabbixToItop.Services;
+﻿using ZabbixToItop.Services;
 using ZabbixToItop.Models;
 using System.Threading.Tasks;
 using System;
@@ -18,8 +14,9 @@ namespace ZabbixToItop
                 if (args.Length >= 7)
                 {
                     var config = new ItopConfiguration(args);
-                    string ticketJson = Utils.ObjectToJson(await Itop.GenerateTicketAsync(config));
-                    await Itop.SaveTicketOnItopAsync(ticketJson, args);
+                    var itop = new Itop();
+                    string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
+                    await itop.SaveTicketOnItopAsync(ticketJson, args);
                 }
                 else
                 {
@@ -29,12 +26,12 @@ namespace ZabbixToItop
             catch (ItopException itopException)
             {
                 Teams teams = new Teams(itopException);
-                await teams.SendErrorAsync();
+                teams.SendError();
             }
             catch (Exception exception)
             {
                 Teams teams = new Teams(exception);
-                await teams.SendErrorAsync();
+                teams.SendError();
             }
 
         }

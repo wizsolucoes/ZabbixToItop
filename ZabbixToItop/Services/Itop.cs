@@ -8,18 +8,32 @@ namespace ZabbixToItop.Services
 {
     public class Itop
     {
-        public Itop() { }
+        private HttpClient Client { get; set; }
 
-        public static async Task<Ticket> GenerateTicketAsync(ItopConfiguration config)
+        public Itop() 
+        { 
+            var httpClientHandler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
+            };
+            Client = new HttpClient(httpClientHandler);
+        }
+
+        public Itop(HttpClient client) 
+        { 
+            Client = client;
+        }
+
+        public async Task<Ticket> GenerateTicketAsync(ItopConfiguration config)
         {
-            TicketFields fields = new TicketFields(config);
+            var fields = new TicketFields(config);
             
             if(config.Service_subcategory_name == null)
             {
                 fields.Servicesubcategory_id = await GetServiceSubcategoryByCIAsync(config.Ci);
             }
 
-            Ticket ticket = new Ticket
+            var ticket = new Ticket
             {
                 Class = config.Class,
                 Status = config.Status,
@@ -32,15 +46,8 @@ namespace ZabbixToItop.Services
             return ticket;
         }
 
-        public static async Task<string> SaveTicketOnItopAsync(string jsonString, string[] args)
+        public async Task<string> SaveTicketOnItopAsync(string jsonString, string[] args)
         {
-            var httpClientHandler = new HttpClientHandler
-            {
-                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
-            };
-
-            var client = new HttpClient(httpClientHandler);
-
             string Itop_url = args[0];
             string Itop_user = args[1];
             string Itop_pwd = args[2];
@@ -54,7 +61,7 @@ namespace ZabbixToItop.Services
 
             var requestBody = new FormUrlEncodedContent(values);
 
-            var response = await client.PostAsync(Itop_url, requestBody);
+            var response = await Client.PostAsync(Itop_url, requestBody);
 
             var itopResponse = Utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
            
@@ -66,29 +73,22 @@ namespace ZabbixToItop.Services
             return "code:" + itopResponse.code + " message:" + itopResponse.message;
         }
 
-        public static async Task<string> GetServiceSubcategoryByCIAsync(string ci)
+        public async Task<string> GetServiceSubcategoryByCIAsync(string ci)
         {
-            var httpClientHandler = new HttpClientHandler
-            {
-                ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
-            };
-
-            var client = new HttpClient(httpClientHandler);
-
             var values = new Dictionary<string, string>
                     {
                         { "auth_pwd", "Admin123_" },
                         { "auth_user", "admin7" },
                         { "json_data", "{ \"operation\": \"core/get\", "+
                                         "\"class\": \"Person\", "+
-                                        "\"key\": \"SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = Service.id WHERE functionalci_id_friendlyname = 'TesteFunctionalCI Server3' AND request_type = 'incident'\", "+
+                                        "\"key\": \"SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = Service.id WHERE functionalci_id_friendlyname = '" + ci + "' AND request_type = 'incident'\", "+
                                         "\"output_fields\": \"friendlyname, email\" }"
                         }
                     };
 
             var requestBody = new FormUrlEncodedContent(values);
             
-            var response = await client.PostAsync("http://localhost:8000/webservices/rest.php?version=1.3", requestBody);
+            var response = await Client.PostAsync("http://localhost:8000/webservices/rest.php?version=1.3", requestBody);
             
             var itopResponse = await response.Content.ReadAsStringAsync();
             
