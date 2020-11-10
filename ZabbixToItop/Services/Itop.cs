@@ -9,19 +9,30 @@ namespace ZabbixToItop.Services
     public class Itop
     {
         private HttpClient Client { get; set; }
+        private string Itop_url { get; set; }
+        private string Itop_user { get; set; }
+        private string Itop_pwd { get; set; }
 
-        public Itop() 
+        public Itop(string[] args)  
         { 
             var httpClientHandler = new HttpClientHandler
             {
                 ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
             };
             Client = new HttpClient(httpClientHandler);
+            
+            Itop_url = args[0];
+            Itop_user = args[1];
+            Itop_pwd = args[2];
         }
 
-        public Itop(HttpClient client) 
+        public Itop(string[] args, HttpClient client) 
         { 
             Client = client;
+
+            Itop_url = args[0];
+            Itop_user = args[1];
+            Itop_pwd = args[2];
         }
 
         public async Task<Ticket> GenerateTicketAsync(ItopConfiguration config)
@@ -48,10 +59,6 @@ namespace ZabbixToItop.Services
 
         public async Task<string> SaveTicketOnItopAsync(string jsonString, string[] args)
         {
-            string Itop_url = args[0];
-            string Itop_user = args[1];
-            string Itop_pwd = args[2];
-
             var values = new Dictionary<string, string>
             {
                 { "auth_pwd", Itop_pwd },
@@ -88,7 +95,7 @@ namespace ZabbixToItop.Services
 
             var requestBody = new FormUrlEncodedContent(values);
             
-            var response = await Client.PostAsync("http://localhost:8000/webservices/rest.php?version=1.3", requestBody);
+            var response = await Client.PostAsync(Itop_url, requestBody);
             
             var itopResponse = await response.Content.ReadAsStringAsync();
             
