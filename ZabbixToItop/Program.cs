@@ -9,8 +9,8 @@ namespace ZabbixToItop
     {
         public static async Task Main(string[] args)
         {
-            // try
-            // {
+            try
+            {
                 if (args.Length >= 7)
                 {
                     var config = new ItopConfiguration(args);
@@ -22,17 +22,17 @@ namespace ZabbixToItop
                 {
                     throw new Exception("Informe a quantidade minima correta de argumentos (7)");
                 }
-            // }
-            // catch (ItopException itopException)
-            // {
-            //     Teams teams = new Teams(itopException);
-            //     teams.SendError();
-            // }
-            // catch (Exception exception)
-            // {
-            //     Teams teams = new Teams(exception);
-            //     teams.SendError();
-            // }
+            }
+            catch (ItopException itopException)
+            {
+                Teams teams = new Teams(itopException);
+                teams.SendError();
+            }
+            catch (Exception exception)
+            {
+                Teams teams = new Teams(exception);
+                teams.SendError();
+            }
 
         }
 
