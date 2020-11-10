@@ -4,7 +4,6 @@ using ZabbixToItop.Services;
 
 namespace ZabbixToItop.Models
 {
-    [ExcludeFromCodeCoverage]
     public class TicketFields
     {
         public TicketFields() { }
