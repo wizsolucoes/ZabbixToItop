@@ -73,7 +73,7 @@ namespace ZabbixToItop.Services
                     }
                 }
             };
-
+            
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(TeamsUrl);
             httpWebRequest.ContentType = "application/json";
             httpWebRequest.Method = "POST";

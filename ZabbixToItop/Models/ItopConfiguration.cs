@@ -19,10 +19,9 @@ namespace ZabbixToItop.Models
             Resource_group_name = args.Length < 14 ? null : args[13] == "" ? null : args[13];
             Status = "dispatched";
             Comment = Ci;
-            LogConfiguration();
         }
 
-        private void LogConfiguration()
+        public void LogConfiguration()
         {
             Log.WriteText("Class = " + Class);
             Log.WriteText("Description = " + Description);

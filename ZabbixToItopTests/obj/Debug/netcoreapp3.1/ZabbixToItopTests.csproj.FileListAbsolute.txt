@@ -210,8 +210,14 @@ c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcore
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.csprojAssemblyReference.cache
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.AssemblyInfoInputs.cache
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.AssemblyInfo.cs
-c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.csproj.CoreCompileInputs.cache
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.csproj.CopyComplete
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.dll
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.pdb
 c:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.genruntimeconfig.cache
+C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\Castle.Core.dll
+C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\Moq.dll
+C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\xunit.abstractions.dll
+C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\xunit.assert.dll
+C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\xunit.core.dll
+C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\bin\Debug\netcoreapp3.1\xunit.execution.dotnet.dll
+C:\Users\rafaelserafim\dev\temp\ZabbixToItop\ZabbixToItopTests\obj\Debug\netcoreapp3.1\ZabbixToItopTests.csproj.CoreCompileInputs.cache

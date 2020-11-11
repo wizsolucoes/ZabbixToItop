@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj": {}
+    "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj": {}
   },
   "projects": {
-    "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj": {
+    "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj",
+        "projectUniqueName": "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj",
         "projectName": "ZabbixToItopTests",
-        "projectPath": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj",
+        "projectPath": "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\ZabbixToItopTests.csproj",
         "packagesPath": "C:\\Users\\rafaelserafim\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\obj\\",
+        "outputPath": "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItopTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rafaelserafim\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,8 +27,8 @@
         "frameworks": {
           "netcoreapp3.1": {
             "projectReferences": {
-              "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj": {
-                "projectPath": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj"
+              "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj": {
+                "projectPath": "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj"
               }
             }
           }
@@ -54,9 +54,17 @@
               "target": "Package",
               "version": "[16.5.0, )"
             },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.15.1, )"
+            },
             "coverlet.collector": {
               "target": "Package",
               "version": "[1.2.0, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
             }
           },
           "imports": [
@@ -78,14 +86,14 @@
         }
       }
     },
-    "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj": {
+    "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
+        "projectUniqueName": "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
         "projectName": "ZabbixToItop",
-        "projectPath": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
+        "projectPath": "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\ZabbixToItop.csproj",
         "packagesPath": "C:\\Users\\rafaelserafim\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\obj\\",
+        "outputPath": "C:\\Users\\rafaelserafim\\dev\\temp\\ZabbixToItop\\ZabbixToItop\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\rafaelserafim\\AppData\\Roaming\\NuGet\\NuGet.Config",

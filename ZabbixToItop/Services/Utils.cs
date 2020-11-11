@@ -21,6 +21,7 @@ namespace ZabbixToItop.Services
 
         public static ItopResponse FormatItopResponse(string response)
         {
+            Console.WriteLine(response);
             var itopResponse = JsonSerializer.Deserialize<ItopResponse>(response);
 
             itopResponse.message = itopResponse.message == null ? "created" : itopResponse.message;
