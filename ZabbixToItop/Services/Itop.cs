@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ZabbixToItop.Models;
+using System;
 
 namespace ZabbixToItop.Services
 {
@@ -57,7 +58,7 @@ namespace ZabbixToItop.Services
             return ticket;
         }
 
-        public async Task<string> SaveTicketOnItopAsync(string jsonString)
+        public async Task<string> SaveTicketAsync(string jsonString)
         {
             var values = new Dictionary<string, string>
             {
@@ -71,8 +72,6 @@ namespace ZabbixToItop.Services
             var response = await Client.PostAsync(Itop_url, requestBody);
 
             var itopResponse = Utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
-
-            Log.WriteText("Save ticket response = " + itopResponse.message);
 
             if (itopResponse.code != 0)
             {
@@ -98,13 +97,11 @@ namespace ZabbixToItop.Services
             var requestBody = new FormUrlEncodedContent(values);
             
             var response = await Client.PostAsync(Itop_url, requestBody);
-            
+
             var itopResponse = await response.Content.ReadAsStringAsync();
-            
+
             var serviceSubcategoryId = Regex.Match(itopResponse, "\"id\":\"(.+?)\"").Groups[1].Value;
 
-            Log.WriteText("Get service subcategory response = " + response);
-            
             if(serviceSubcategoryId.Equals(""))
             {
                 throw new ItopException("Nenhum service subcategory foi encontrado para o ci " + ci, 100);
