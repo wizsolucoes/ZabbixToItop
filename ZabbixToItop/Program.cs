@@ -11,9 +11,9 @@ namespace ZabbixToItop
         {
             try
             {
-                if (args.Length >= 7)
+                if (args.Length >= 7) 
                 {
-                    var log = new Log("ZabbixToItop.log");
+                    var log = new Log("ZabbixToItop.log", args[4]);
                     Log.WriteText("-------------------- " + DateTime.Now + " --------------------");
                     var config = new ItopConfiguration(args);
                     config.LogConfiguration();

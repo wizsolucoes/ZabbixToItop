@@ -18,6 +18,13 @@ namespace ZabbixToItop.Services
             CurrentDirectory = Directory.GetCurrentDirectory();
         }
 
+        public Log(string fileName, string directory)
+        {
+            Console.WriteLine(directory);
+            FileName = fileName;
+            CurrentDirectory = directory;
+        }
+
         public static void WriteText(string text)
         {
             var completePath = CurrentDirectory + "/" + FileName;
@@ -30,6 +37,11 @@ namespace ZabbixToItop.Services
                 SourceStream.Seek(0, SeekOrigin.End);
                 SourceStream.Write(result, 0, result.Length);
             }
+        }
+
+        public static string ReadText()
+        {
+            return File.ReadAllText(CurrentDirectory + "/" + FileName);
         }
     }
 }
