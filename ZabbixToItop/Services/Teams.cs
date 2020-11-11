@@ -13,22 +13,26 @@ namespace ZabbixToItop.Services
         private string Message { get; set; }
         private string ErrorCode { get; set; }
         private string Body { get; set; }
+        private string TeamsUrl { get; set; }
         
-        public Teams(Exception exception)
+        public Teams(Exception exception, string teamsUrl)
         {
             Message = exception.Message;
             ErrorCode = "";
             Body = exception.ToString();
+            TeamsUrl = teamsUrl;
         }
 
-        public Teams(ItopException exception)
+        public Teams(ItopException exception, string teamsUrl )
         {
             Message = exception.Message;
             ErrorCode = exception.ErrorCode.ToString();
             Body = exception.ToString();
+            TeamsUrl = teamsUrl;
         }
         public void SendError()
         {
+            Log.WriteText("Exception = " + Body);
             TeamsHook teamsHook = new TeamsHook
             {
                 Summary = "Erro ao salvar Ticket do Zabbix no Itop",
@@ -70,21 +74,21 @@ namespace ZabbixToItop.Services
                 }
             };
 
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create("https://outlook.office.com/webhook/33621ba1-f736-4a59-aeef-9a2affc3b2bb@7c416a2f-a987-4337-bb0a-94e57c1f32e7/IncomingWebhook/5d28bf49ab734814954632eda45eb568/4070e9f8-9676-4659-bfc4-2138659f8145");
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
+            // var httpWebRequest = (HttpWebRequest)WebRequest.Create(TeamsUrl);
+            // httpWebRequest.ContentType = "application/json";
+            // httpWebRequest.Method = "POST";
 
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                var json = Utils.ObjectToJson(teamsHook);
-                streamWriter.Write(json);
-            }
+            // using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            // {
+            //     var json = Utils.ObjectToJson(teamsHook);
+            //     streamWriter.Write(json);
+            // }
 
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-            }
+            // var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            // using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            // {
+            //     var result = streamReader.ReadToEnd();
+            // }
 
         }
     }

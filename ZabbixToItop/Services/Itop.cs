@@ -57,7 +57,7 @@ namespace ZabbixToItop.Services
             return ticket;
         }
 
-        public async Task<string> SaveTicketOnItopAsync(string jsonString, string[] args)
+        public async Task<string> SaveTicketOnItopAsync(string jsonString)
         {
             var values = new Dictionary<string, string>
             {
@@ -71,7 +71,9 @@ namespace ZabbixToItop.Services
             var response = await Client.PostAsync(Itop_url, requestBody);
 
             var itopResponse = Utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
-           
+
+            Log.WriteText("Save ticket response = " + itopResponse.message);
+
             if (itopResponse.code != 0)
             {
                 throw new ItopException(itopResponse.message, itopResponse.code);
@@ -96,11 +98,13 @@ namespace ZabbixToItop.Services
             var requestBody = new FormUrlEncodedContent(values);
             
             var response = await Client.PostAsync(Itop_url, requestBody);
+
+            ItopResponse itopResponse = Utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
             
-            var itopResponse = await response.Content.ReadAsStringAsync();
+            var serviceSubcategoryId = Regex.Match(itopResponse.message, "\"id\":\"(.+?)\"").Groups[1].Value;
             
-            var serviceSubcategoryId = Regex.Match(itopResponse, "\"id\":\"(.+?)\"").Groups[1].Value;
-            
+            Log.WriteText("Get service subcategory response = " + itopResponse.message);
+
             return "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='" + serviceSubcategoryId + "'";
         }
     }
