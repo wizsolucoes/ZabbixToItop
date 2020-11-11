@@ -1,9 +1,5 @@
 using System.Text;
 using System.IO;
-using ZabbixToItop.Services;
-using ZabbixToItop.Models;
-using System.Threading.Tasks;
-using System;
 
 namespace ZabbixToItop.Services
 {
@@ -20,7 +16,6 @@ namespace ZabbixToItop.Services
 
         public Log(string fileName, string directory)
         {
-            Console.WriteLine(directory);
             FileName = fileName;
             CurrentDirectory = directory;
         }

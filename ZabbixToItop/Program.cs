@@ -11,7 +11,7 @@ namespace ZabbixToItop
         {
             try
             {
-                if (args.Length >= 7) 
+                if (args.Length == 12) 
                 {
                     var log = new Log("ZabbixToItop.log", args[4]);
                     Log.WriteText("-------------------- " + DateTime.Now + " --------------------");
@@ -23,7 +23,7 @@ namespace ZabbixToItop
                 }
                 else
                 {
-                    throw new Exception("Informe a quantidade minima correta de argumentos (7)");
+                    throw new Exception("Informe a quantidade correta de argumentos (12)");
                 }
             }
             catch (ItopException itopException)
