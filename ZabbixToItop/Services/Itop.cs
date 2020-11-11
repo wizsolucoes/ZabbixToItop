@@ -98,12 +98,17 @@ namespace ZabbixToItop.Services
             var requestBody = new FormUrlEncodedContent(values);
             
             var response = await Client.PostAsync(Itop_url, requestBody);
+            
+            var itopResponse = await response.Content.ReadAsStringAsync();
+            
+            var serviceSubcategoryId = Regex.Match(itopResponse, "\"id\":\"(.+?)\"").Groups[1].Value;
 
-            ItopResponse itopResponse = Utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
+            Log.WriteText("Get service subcategory response = " + response);
             
-            var serviceSubcategoryId = Regex.Match(itopResponse.message, "\"id\":\"(.+?)\"").Groups[1].Value;
-            
-            Log.WriteText("Get service subcategory response = " + itopResponse.message);
+            if(serviceSubcategoryId.Equals(""))
+            {
+                throw new ItopException("Nenhum service subcategory foi encontrado para o ci " + ci, 100);
+            }
 
             return "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='" + serviceSubcategoryId + "'";
         }

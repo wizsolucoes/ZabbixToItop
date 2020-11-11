@@ -74,21 +74,21 @@ namespace ZabbixToItop.Services
                 }
             };
 
-            // var httpWebRequest = (HttpWebRequest)WebRequest.Create(TeamsUrl);
-            // httpWebRequest.ContentType = "application/json";
-            // httpWebRequest.Method = "POST";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(TeamsUrl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
 
-            // using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            // {
-            //     var json = Utils.ObjectToJson(teamsHook);
-            //     streamWriter.Write(json);
-            // }
+            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                var json = Utils.ObjectToJson(teamsHook);
+                streamWriter.Write(json);
+            }
 
-            // var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            // using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            // {
-            //     var result = streamReader.ReadToEnd();
-            // }
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                var result = streamReader.ReadToEnd();
+            }
 
         }
     }

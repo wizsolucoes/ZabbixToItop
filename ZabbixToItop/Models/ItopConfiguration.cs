@@ -6,10 +6,6 @@ namespace ZabbixToItop.Models
     {
         public ItopConfiguration(string[] args)
         {
-            Log.WriteText("arg0 = " + args[0]);
-            Log.WriteText("arg1 = " + args[1]);
-            Log.WriteText("arg2 = " + args[2]);
-            Log.WriteText("arg3 = " + args[3]);
             Class = args[4]; 
             Description = args[5];
             Origin = args[6];
