@@ -1,9 +1,5 @@
 using System.Text;
 using System.IO;
-using ZabbixToItop.Services;
-using ZabbixToItop.Models;
-using System.Threading.Tasks;
-using System;
 
 namespace ZabbixToItop.Services
 {
@@ -18,6 +14,12 @@ namespace ZabbixToItop.Services
             CurrentDirectory = Directory.GetCurrentDirectory();
         }
 
+        public Log(string fileName, string directory)
+        {
+            FileName = fileName;
+            CurrentDirectory = directory;
+        }
+
         public static void WriteText(string text)
         {
             var completePath = CurrentDirectory + "/" + FileName;
@@ -30,6 +32,11 @@ namespace ZabbixToItop.Services
                 SourceStream.Seek(0, SeekOrigin.End);
                 SourceStream.Write(result, 0, result.Length);
             }
+        }
+
+        public static string ReadText()
+        {
+            return File.ReadAllText(CurrentDirectory + "/" + FileName);
         }
     }
 }

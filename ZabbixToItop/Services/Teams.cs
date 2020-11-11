@@ -68,6 +68,11 @@ namespace ZabbixToItop.Services
                                 Name = "Body",
                                 Value = Body
                             },
+                            new Fact
+                            {
+                                Name = "Log",
+                                Value = Log.ReadText()
+                            },
                         },
                         Markdown = true
                     }

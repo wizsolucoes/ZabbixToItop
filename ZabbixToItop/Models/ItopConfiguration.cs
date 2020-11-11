@@ -6,17 +6,17 @@ namespace ZabbixToItop.Models
     {
         public ItopConfiguration(string[] args)
         {
-            Class = args[4]; 
-            Description = args[5];
-            Origin = args[6];
-            Ci = args[7];
-            Urgency = args[8];
-            Team = args[9];
+            Class = args[5];  
+            Description = args[6];
+            Origin = args[7];
+            Ci = args[8];
+            Urgency = args[9];
+            Team = args[10];
             Title = Ci;
-            Impact = args[10];
-            Service_name = args.Length < 12 ? null : args[11] == "" ? null : args[11];
-            Service_subcategory_name = args.Length < 13 ? null : args[12] == "" ? null : args[12];
-            Resource_group_name = args.Length < 14 ? null : args[13] == "" ? null : args[13];
+            Impact = args[11];
+            Service_name = args.Length < 13 ? null : args[12] == "" ? null : args[12];
+            Service_subcategory_name = args.Length < 14 ? null : args[13] == "" ? null : args[13];
+            Resource_group_name = args.Length < 15 ? null : args[14] == "" ? null : args[14];
             Status = "dispatched";
             Comment = Ci;
         }
@@ -33,6 +33,35 @@ namespace ZabbixToItop.Models
             Log.WriteText("Service_name = " + Service_name);
             Log.WriteText("Service_subcategory_name = " + Service_subcategory_name);
             Log.WriteText("Resource_group_name = " + Resource_group_name);
+        }
+
+        private string CheckUrgency(string urgency)
+        {
+            if (urgency.Equals("Not classified"))
+            {
+                urgency = "";
+            }
+            else if(urgency.Equals("Information"))
+            {
+                urgency = "";
+            }
+            else if(urgency.Equals("Warning"))
+            {
+                urgency = "";
+            }
+            else if(urgency.Equals("Average"))
+            {
+                urgency = "";
+            }
+            else if(urgency.Equals("High"))
+            {
+                urgency = "";
+            }
+            else if(urgency.Equals("Disaster"))
+            {
+                urgency = "";
+            }
+            return urgency;
         }
 
         public string Service_name { get; set; } 
