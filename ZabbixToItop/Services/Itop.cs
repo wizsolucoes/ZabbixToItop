@@ -57,7 +57,7 @@ namespace ZabbixToItop.Services
             return ticket;
         }
 
-        public async Task<string> SaveTicketOnItopAsync(string jsonString)
+        public async Task<string> SaveTicketAsync(string jsonString)
         {
             var values = new Dictionary<string, string>
             {

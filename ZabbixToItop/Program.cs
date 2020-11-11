@@ -18,7 +18,7 @@ namespace ZabbixToItop
                     var config = new ItopConfiguration(args);
                     var itop = new Itop(args);
                     string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
-                    await itop.SaveTicketOnItopAsync(ticketJson);
+                    await itop.SaveTicketAsync(ticketJson);
                 }
                 else
                 {
