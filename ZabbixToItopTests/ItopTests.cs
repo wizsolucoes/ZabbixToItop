@@ -134,5 +134,33 @@ namespace ZabbixToItopTests
             var itop = new Itop(args, httpClient);
             var result = await itop.GetServiceSubcategoryByCIAsync(config.Ci);
         }
+
+        [TestMethod]
+        public async Task Should_Get_Service_Subcategory_When_Null()
+        {
+            var handlerMock = new Mock<HttpMessageHandler>();
+            var response = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(@"{""objects"":{""ServiceSubcategory::15"":{""code"":0,""message"":"""",""class"":""ServiceSubcategory"",""key"":""15"",""fields"":{""id"":""15"",""friendlyname"":""Troubleshooting""}}},""code"":0,""message"":""Found: 1""}"),
+            };
+
+            handlerMock
+               .Protected()
+               .Setup<Task<HttpResponseMessage>>(
+                  "SendAsync",
+                  ItExpr.IsAny<HttpRequestMessage>(),
+                  ItExpr.IsAny<CancellationToken>())
+               .ReturnsAsync(response);
+            var httpClient = new HttpClient(handlerMock.Object);
+
+            string[] args = new string[] { "https://testes.com", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software" };
+            ItopConfiguration config = new ItopConfiguration(args);
+
+            var itop = new Itop(args, httpClient);
+
+            var result = await itop.GenerateTicketAsync(config);
+            Assert.AreEqual(result.Fields.Servicesubcategory_id, "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='15'");
+        }
     }
 }
