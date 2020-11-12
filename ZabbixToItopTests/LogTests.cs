@@ -11,10 +11,5 @@ namespace ZabbixToItopTests
     [TestClass]
     class LogTests
     {
-        [TestMethod]
-        public async Task Should_Save_Text_In_Log_File()
-        {
-            
-        }
     }
 }
