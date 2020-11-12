@@ -1,8 +1,6 @@
-using System.Net.Http;
 using System.Collections.Generic;
 using ZabbixToItop.Models;
 using System;
-using System.Threading.Tasks;
 using System.Net;
 using System.IO;
 

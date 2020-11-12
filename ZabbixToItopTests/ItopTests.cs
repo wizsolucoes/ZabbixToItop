@@ -20,7 +20,7 @@ namespace ZabbixToItopTests
         [TestMethod]
         public async Task Should_Generate_Ticket()
         {
-            string[] args = new string[] { "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
+            string[] args = new string[] { "", "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
             ItopConfiguration config = new ItopConfiguration(args);
             var itop = new Itop(args);
             Ticket ticketJson = await itop.GenerateTicketAsync(config);

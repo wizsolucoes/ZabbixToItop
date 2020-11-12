@@ -35,7 +35,7 @@ namespace ZabbixToItop.Models
             Log.WriteText("Resource_group_name = " + Resource_group_name);
         }
 
-        private string CheckUrgency(string urgency)
+        public string CheckUrgency(string urgency)
         {
             if (urgency.Equals("Not classified"))
             {
