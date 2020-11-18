@@ -13,7 +13,7 @@ namespace ZabbixToItop.Models
             Log.WriteText("arg zabbix 5=" + args[9]);
             Log.WriteText("arg zabbix 6=" + args[10]);
             Log.WriteText("arg zabbix 7=" + args[11]);
-
+            args[8] = "Problem started at 17:30:52 on 2020.11.18\n Problem name: teste novo ping\n Host: Cluster1\n Severity: Disaster\n \n Original problem ID: 1453\n";
             Class = args[5];  
             Description = args[6]; 
             Origin = args[7];
