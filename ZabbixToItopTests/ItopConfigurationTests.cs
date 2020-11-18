@@ -10,16 +10,16 @@ namespace ZabbixToItopTests
     public class ItopConfigurationTests
     {
         [TestMethod]
-        public void Should_Initialize_ItopConfiguration_With_All_Arguments()
+        public void Should_Initialize_ItopConfiguration_Correctly()
         {
-            string[] args = new string[] { "", "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
-
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
+            
             ItopConfiguration config = new ItopConfiguration(args);
 
-            Assert.AreEqual(config.Service_name, "Software");
-            Assert.AreEqual(config.Service_subcategory_name, "Microsoft Office Support");
+            Assert.AreEqual(config.Service_name, null);
+            Assert.AreEqual(config.Service_subcategory_name, null);
             Assert.AreEqual(config.Title, "Cluster1");
-            Assert.AreEqual(config.Resource_group_name, "resourceGroupName");
+            Assert.AreEqual(config.Resource_group_name, null);
             Assert.AreEqual(config.Comment, "Cluster1");
 
             Assert.AreEqual(config.Origin, "monitoring");
@@ -33,62 +33,18 @@ namespace ZabbixToItopTests
         }
 
         [TestMethod]
-        public void Should_Initialize_ItopConfiguration_Without_Resource_group_name()
-        {
-            string[] args = new string[] { "", "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support" };
-
-            ItopConfiguration config = new ItopConfiguration(args);
-
-            Assert.AreEqual(config.Resource_group_name, null);
-        }
-
-        [TestMethod]
-        public void Should_Initialize_ItopConfiguration_With_Empty_String_Resource_group_name()
-        {
-            string[] args = new string[] { "", "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "" };
-
-            ItopConfiguration config = new ItopConfiguration(args);
-
-            Assert.AreEqual(config.Resource_group_name, null);
-        }
-
-        [TestMethod]
-        public void Should_Initialize_ItopConfiguration_Without_Service()
-        {
-            string[] args = new string[] { "", "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2" };
-
-            ItopConfiguration config = new ItopConfiguration(args);
-
-            Assert.AreEqual(config.Resource_group_name, null);
-            Assert.AreEqual(config.Service_name, null);
-            Assert.AreEqual(config.Service_subcategory_name, null);
-        }
-
-        [TestMethod]
-        public void Should_Initialize_ItopConfiguration_With_Empty_String_Service()
-        {
-            string[] args = new string[] { "", "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "", "" };
-
-            var config = new ItopConfiguration(args);
-
-            Assert.AreEqual(config.Resource_group_name, null);
-            Assert.AreEqual(config.Service_name, null);
-            Assert.AreEqual(config.Service_subcategory_name, null);
-        }
-
-        [TestMethod]
         public void Should_Assert_Urgency_Value_Correctly()
         {
-            string[] args = new string[] { "", "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "", "" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
 
             var config = new ItopConfiguration(args);
 
-            Assert.AreEqual(config.CheckUrgency("Not classified"), "");
-            Assert.AreEqual(config.CheckUrgency("Information"), "");
-            Assert.AreEqual(config.CheckUrgency("Warning"), "");
-            Assert.AreEqual(config.CheckUrgency("Average"), "");
-            Assert.AreEqual(config.CheckUrgency("High"), "");
-            Assert.AreEqual(config.CheckUrgency("Disaster"), "");
+            Assert.AreEqual(config.CheckUrgency("Not classified"), "0");
+            Assert.AreEqual(config.CheckUrgency("Information"), "0");
+            Assert.AreEqual(config.CheckUrgency("Warning"), "1");
+            Assert.AreEqual(config.CheckUrgency("Average"), "2");
+            Assert.AreEqual(config.CheckUrgency("High"), "3");
+            Assert.AreEqual(config.CheckUrgency("Disaster"), "4");
         }
     }
 }

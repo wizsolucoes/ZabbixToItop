@@ -2,8 +2,6 @@ using System.Text;
 using System.Collections.Generic;
 using ZabbixToItop.Models;
 using System;
-using System.Net;
-using System.IO;
 using System.Net.Http;
 
 namespace ZabbixToItop.Services
@@ -37,7 +35,7 @@ namespace ZabbixToItop.Services
         }
 
 
-        public Teams(Exception exception, string teamsUrl, HttpClient client )
+        public Teams(Exception exception, string teamsUrl, HttpClient client)
         {
             Message = exception.Message;
             ErrorCode = "";
@@ -87,7 +85,7 @@ namespace ZabbixToItop.Services
                             new Fact
                             {
                                 Name = "Origem",
-                                Value = "Zabbix" 
+                                Value = "Zabbix"
                             },
                             new Fact
                             {
@@ -105,13 +103,13 @@ namespace ZabbixToItop.Services
                 }
             };
 
-            var json = Utils.ObjectToJson(teamsHook);
+            // var json = Utils.ObjectToJson(teamsHook);
 
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            // var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await Client.PostAsync(TeamsUrl, data);
+            // var result = Client.PostAsync(TeamsUrl, content).Result;
 
-            var teamsResponse = await response.Content.ReadAsStringAsync();
+            // Log.WriteText(result.Content.ReadAsStringAsync().Result);
         }
     }
 }

@@ -54,7 +54,6 @@ namespace ZabbixToItop.Services
                 Output_fields = "id",
                 Fields = fields
             };
-
             return ticket;
         }
 

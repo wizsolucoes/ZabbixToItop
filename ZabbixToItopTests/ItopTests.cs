@@ -20,12 +20,30 @@ namespace ZabbixToItopTests
         [TestMethod]
         public async Task Should_Generate_Ticket()
         {
-            string[] args = new string[] { "", "", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
+            var handlerMock = new Mock<HttpMessageHandler>();
+            var response = new HttpResponseMessage
+            {
+                StatusCode = HttpStatusCode.OK,
+                Content = new StringContent(@"{""objects"":{""ServiceSubcategory::15"":{""code"":0,""message"":"""",""class"":""ServiceSubcategory"",""key"":""15"",""fields"":{""id"":""15"",""friendlyname"":""Troubleshooting""}}},""code"":0,""message"":""Found: 1""}"),
+            };
+
+            handlerMock
+               .Protected()
+               .Setup<Task<HttpResponseMessage>>(
+                  "SendAsync",
+                  ItExpr.IsAny<HttpRequestMessage>(),
+                  ItExpr.IsAny<CancellationToken>())
+               .ReturnsAsync(response);
+            var httpClient = new HttpClient(handlerMock.Object);
+
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
             ItopConfiguration config = new ItopConfiguration(args);
-            var itop = new Itop(args);
+
+            var itop = new Itop(args, httpClient);
+
             Ticket ticketJson = await itop.GenerateTicketAsync(config);
             Assert.AreEqual(ticketJson.Class, "UserRequest");
-            Assert.AreEqual(ticketJson.Fields.Service_id, "SELECT Service WHERE name='Software'");
+            Assert.AreEqual(ticketJson.Fields.Service_id, "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = 'Cluster1'");
             Assert.AreEqual(ticketJson.Fields.Functionalcis_list[0].Functionalci_id, "SELECT FunctionalCI WHERE name='Cluster1'");
         }
 
@@ -48,7 +66,8 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
+
             ItopConfiguration config = new ItopConfiguration(args);
             var itop = new Itop(args, httpClient);
             string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
@@ -76,7 +95,7 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
             ItopConfiguration config = new ItopConfiguration(args);
             var itop = new Itop(args, httpClient);
             string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
@@ -102,7 +121,7 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
             ItopConfiguration config = new ItopConfiguration(args);
             var itop = new Itop(args, httpClient);
             var result = await itop.GetServiceSubcategoryByCIAsync(config.Ci);
@@ -129,7 +148,7 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software", "Microsoft Office Support", "resourceGroupName" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
             ItopConfiguration config = new ItopConfiguration(args);
             var itop = new Itop(args, httpClient);
             var result = await itop.GetServiceSubcategoryByCIAsync(config.Ci);
@@ -154,7 +173,7 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "UserRequest", "Description", "monitoring", "Cluster1", "4", "Helpdesk", "2", "Software" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
             ItopConfiguration config = new ItopConfiguration(args);
 
             var itop = new Itop(args, httpClient);

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Text.RegularExpressions;
+using System.Reflection;
 using System;
 using System.Text.Json;
 using ZabbixToItop.Models;
@@ -26,6 +27,13 @@ namespace ZabbixToItop.Services
             itopResponse.message = itopResponse.message == null ? "created" : itopResponse.message;
 
             return itopResponse;
+        }
+
+        public static string GetStringBetween(string str, string str1, string str2)
+        {
+            int from = str.IndexOf(str1) + str1.Length;
+            int to = str.LastIndexOf(str2);
+            return str.Substring(from, to - from);
         }
     }
 }
