@@ -31,6 +31,7 @@ namespace ZabbixToItop.Services
 
         public static string GetStringBetween(string str, string str1, string str2)
         {
+            str = str.Replace(System.Environment.NewLine, "");
             int from = str.IndexOf(str1) + str1.Length;
             int to = str.LastIndexOf(str2);
             return str.Substring(from, to - from);
