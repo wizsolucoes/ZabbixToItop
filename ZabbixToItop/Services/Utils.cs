@@ -31,10 +31,10 @@ namespace ZabbixToItop.Services
 
         public static string GetStringBetween(string str, string str1, string str2)
         {
-            str = str.Replace(System.Environment.NewLine, "");
-            int from = str.IndexOf(str1) + str1.Length;
-            int to = str.LastIndexOf(str2);
-            return str.Substring(from, to - from);
+            str = str.Replace("^M", "");
+            str = str.Replace(System.Environment.NewLine, ""); 
+            var start = str.IndexOf(str1) +  str1.Length;
+            return str.Substring(start, str.IndexOf(str2) - start);
         }
     }
 }
