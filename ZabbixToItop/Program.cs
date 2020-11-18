@@ -16,7 +16,6 @@ namespace ZabbixToItop
                     var log = new Log("ZabbixToItop.log", args[4]);
                     Log.WriteText("-------------------- " + DateTime.Now + " --------------------");
                     var config = new ItopConfiguration(args);
-                    config.LogConfiguration();
                     var itop = new Itop(args);
                     string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
                     Log.WriteText("Save ticket response = " + await itop.SaveTicketAsync(ticketJson));
