@@ -33,6 +33,7 @@ namespace ZabbixToItop.Services
         {
             str = str.Replace("^M", "");
             str = str.Replace(System.Environment.NewLine, ""); 
+            str = new Regex("[ ]{2,}", RegexOptions.None).Replace(str, " ");
             var start = str.IndexOf(str1) +  str1.Length;
             return str.Substring(start, str.IndexOf(str2) - start);
         }
