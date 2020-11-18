@@ -13,7 +13,7 @@ namespace ZabbixToItop.Models
             Log.WriteText("arg zabbix 5=" + args[9]);
             Log.WriteText("arg zabbix 6=" + args[10]);
             Log.WriteText("arg zabbix 7=" + args[11]);
-
+            
             Class = args[5];  
             Description = args[6]; 
             Origin = args[7];
