@@ -18,7 +18,7 @@ namespace ZabbixToItop.Models
             Description = args[6]; 
             Origin = args[7];
             Ci = Utils.GetStringBetween(args[8], "Host: ", " Severity:");
-            Urgency = CheckUrgency(Utils.GetStringBetween(args[8], "Severity: ", "  Original"));
+            Urgency = CheckUrgency(Utils.GetStringBetween(args[8], "Severity: ", " Original"));
             Team = args[10];
             Title = Ci;
             Impact = args[11];
