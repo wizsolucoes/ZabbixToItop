@@ -1,36 +1,62 @@
+using System.Text;
 using System.Collections.Generic;
 using ZabbixToItop.Models;
 using System;
-using System.Net;
-using System.IO;
+using System.Net.Http;
 
 namespace ZabbixToItop.Services
 {
     public class Teams
     {
-        private string Message { get; set; }
-        private string ErrorCode { get; set; }
-        private string Body { get; set; }
-        private string TeamsUrl { get; set; }
-        
+        public string Message { get; set; }
+        public string ErrorCode { get; set; }
+        public string Body { get; set; }
+        public string TeamsUrl { get; set; }
+        private HttpClient Client { get; set; }
+
         public Teams(Exception exception, string teamsUrl)
         {
             Message = exception.Message;
             ErrorCode = "";
             Body = exception.ToString();
             TeamsUrl = teamsUrl;
+
+            Client = new HttpClient();
         }
 
-        public Teams(ItopException exception, string teamsUrl )
+        public Teams(ItopException exception, string teamsUrl)
         {
             Message = exception.Message;
             ErrorCode = exception.ErrorCode.ToString();
             Body = exception.ToString();
             TeamsUrl = teamsUrl;
+
+            Client = new HttpClient();
         }
-        public void SendError()
+
+
+        public Teams(Exception exception, string teamsUrl, HttpClient client)
         {
-            Log.WriteText("Exception = " + Body);
+            Message = exception.Message;
+            ErrorCode = "";
+            Body = exception.ToString();
+            TeamsUrl = teamsUrl;
+
+            Client = client;
+        }
+
+        public Teams(ItopException exception, string teamsUrl, HttpClient client)
+        {
+            Message = exception.Message;
+            ErrorCode = exception.ErrorCode.ToString();
+            Body = exception.ToString();
+            TeamsUrl = teamsUrl;
+
+            Client = client;
+        }
+
+        public async void SendErrorAsync()
+        {
             TeamsHook teamsHook = new TeamsHook
             {
                 Summary = "Erro ao salvar Ticket do Zabbix no Itop",
@@ -59,7 +85,7 @@ namespace ZabbixToItop.Services
                             new Fact
                             {
                                 Name = "Origem",
-                                Value = "Zabbix" 
+                                Value = "Zabbix"
                             },
                             new Fact
                             {
@@ -76,23 +102,14 @@ namespace ZabbixToItop.Services
                     }
                 }
             };
-            
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(TeamsUrl);
-            httpWebRequest.ContentType = "application/json";
-            httpWebRequest.Method = "POST";
 
-            using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-            {
-                var json = Utils.ObjectToJson(teamsHook);
-                streamWriter.Write(json);
-            }
+            // var json = Utils.ObjectToJson(teamsHook);
 
-            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-            {
-                var result = streamReader.ReadToEnd();
-            }
+            // var content = new StringContent(json, Encoding.UTF8, "application/json");
 
+            // var result = Client.PostAsync(TeamsUrl, content).Result;
+
+            // Log.WriteText(result.Content.ReadAsStringAsync().Result);
         }
     }
 }
