@@ -36,8 +36,7 @@ namespace ZabbixToItop.Services
             str = new Regex("[^a-zA-Z0-9 -:]").Replace(str, "");
             str = new Regex("[ ]{2,}", RegexOptions.None).Replace(str, " ");
             Log.WriteText("teste ="+str);
-            var start = str.IndexOf(str1) +  str1.Length;
-            return str.Substring(start, str.IndexOf(str2) - start);
+            return Regex.Match(str, @str1+"(.*)"+str2).Groups[1].Value;
         }
     }
 }

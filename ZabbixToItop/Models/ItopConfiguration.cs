@@ -13,11 +13,12 @@ namespace ZabbixToItop.Models
             Log.WriteText("arg zabbix 5=" + args[9]);
             Log.WriteText("arg zabbix 6=" + args[10]);
             Log.WriteText("arg zabbix 7=" + args[11]);
-
+            
             Class = args[5];  
             Description = args[6]; 
             Origin = args[7];
             Ci = Utils.GetStringBetween(args[8], "Host: ", "Severity:");
+            Log.WriteText("ci =" + Ci);
             Urgency = CheckUrgency(Utils.GetStringBetween(args[8], "Severity: ", "Original"));
             Team = args[10];
             Title = Ci;
