@@ -33,8 +33,6 @@ namespace ZabbixToItopTests
                 Fields = fields
             };
 
-            Utils utils = new Utils();
-
             string ticketJson = Utils.ObjectToJson(ticket);
             ticketJson = ticketJson.Replace(System.Environment.NewLine, "");
             ticketJson = new Regex("[ ]{2,}", RegexOptions.None).Replace(ticketJson, " ");
@@ -48,8 +46,6 @@ namespace ZabbixToItopTests
         public void Should_Convert_Empty_Ticket_Oject_To_Empty_JSON()
         {
             Ticket ticket = new Ticket();
-
-            Utils utils = new Utils();
 
             string ticketJson = Utils.ObjectToJson(ticket);
             ticketJson = ticketJson.Replace(System.Environment.NewLine, "");
@@ -65,8 +61,6 @@ namespace ZabbixToItopTests
         {
             string successItopMessage = "{\"objects\":{\"UserRequest::48\":{\"code\":0,\"message\":\"created\",\"class\":\"UserRequest\",\"key\":\"48\",\"fields\":{\"id\":\"48\"}}},\"code\":0,\"message\":null}";
 
-            Utils utils = new Utils();
-
             ItopResponse utilsResponse = Utils.FormatItopResponse(successItopMessage);
 
             Assert.AreEqual(utilsResponse.code, 0);
@@ -78,12 +72,18 @@ namespace ZabbixToItopTests
         {
             string successItopMessage = "{\"code\":100,\"message\":\"Error: Missing parameter 'operation'\"}";
 
-            Utils utils = new Utils();
-
             ItopResponse utilsResponse = Utils.FormatItopResponse(successItopMessage);
 
             Assert.AreEqual(utilsResponse.code, 100);
             Assert.AreEqual(utilsResponse.message, "Error: Missing parameter 'operation'");
         }
+
+        [TestMethod]
+        public void Should_Return_Number_Correctly()
+        {
+            string response = Utils.GetNumberInString("Problem started at 13:46:22 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 2649^M ^M ^M Equipe: Helpdesk ^M Impact: 2", "Impact: ");
+            Assert.AreEqual("2", response);
+        }
+
     }
 }

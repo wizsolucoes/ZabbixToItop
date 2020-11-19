@@ -6,23 +6,14 @@ namespace ZabbixToItop.Models
     {
         public ItopConfiguration(string[] args)
         {
-            Log.WriteText("arg zabbix 1=" + args[5]);
-            Log.WriteText("arg zabbix 2=" + args[6]);
-            Log.WriteText("arg zabbix 3=" + args[7]);
-            Log.WriteText("arg zabbix 4=" + args[8]);
-            Log.WriteText("arg zabbix 5=" + args[9]);
-            Log.WriteText("arg zabbix 6=" + args[10]);
-            Log.WriteText("arg zabbix 7=" + args[11]);
-            
             Class = args[5];  
             Description = args[6]; 
-            Origin = args[7];
-            Ci = Utils.GetStringBetween(args[8], "Host: ", "Severity:");
-            Log.WriteText("ci =" + Ci);
-            Urgency = CheckUrgency(Utils.GetStringBetween(args[8], "Severity: ", "Original"));
-            Team = args[10];
+            Origin = "monitoring";
+            Ci = Utils.GetStringBetween(args[7], "Host: ", "Severity:");
+            Urgency = CheckUrgency(Utils.GetStringBetween(args[7], "Severity: ", "Original"));
+            Team = Utils.GetStringBetween(args[7], "Equipe: ", "Impact:");
             Title = Ci;
-            Impact = args[11];
+            Impact = Utils.GetNumberInString(args[7], "Impact: ");
             Status = "dispatched";
             Comment = Ci;
         }

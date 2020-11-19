@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 using System.IO;
 
@@ -12,12 +13,14 @@ namespace ZabbixToItop.Services
         {
             FileName = fileName;
             CurrentDirectory = Directory.GetCurrentDirectory();
+            WriteText("-------------------- " + DateTime.Now + " --------------------");
         }
 
         public Log(string fileName, string directory)
         {
             FileName = fileName;
             CurrentDirectory = directory;
+            WriteText("-------------------- " + DateTime.Now + " --------------------");
         }
 
         public static void WriteText(string text)
