@@ -38,9 +38,5 @@ namespace ZabbixToItop.Services
             return Regex.Match(str, @str1 + "(.*)" + str2).Groups[1].Value.Trim();
         }
 
-        public static string GetNumberInString(string str, string param)
-        {
-            return Regex.Match(str, param + "([0-9]*)").Groups[1].Value.Trim();
-        }
     }
 }

@@ -36,7 +36,7 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 13:46:22 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 2649^M ^M ^M Equipe: Helpdesk ^M Impact: 2"};
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^M Host: Cluster1^M Severidade: Disaster^M Impacto: 2" };
             var config = new ItopConfiguration(args);
 
             var itop = new Itop(args, httpClient);

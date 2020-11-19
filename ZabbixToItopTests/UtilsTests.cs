@@ -79,11 +79,12 @@ namespace ZabbixToItopTests
         }
 
         [TestMethod]
-        public void Should_Return_Number_Correctly()
+        public void Should_Get_The_Correct_Value_From_String()
         {
-            string response = Utils.GetNumberInString("Problem started at 13:46:22 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 2649^M ^M ^M Equipe: Helpdesk ^M Impact: 2", "Impact: ");
-            Assert.AreEqual("2", response);
+            var response = Utils.GetStringBetween("Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^M Host: Cluster1^M Severidade: Disaster^M Impacto: 2", "Equipe:", "Host:");
+            Assert.AreEqual("Helpdesk", response);
         }
+
 
     }
 }

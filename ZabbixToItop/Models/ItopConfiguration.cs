@@ -9,11 +9,11 @@ namespace ZabbixToItop.Models
             Class = args[5];  
             Description = args[6]; 
             Origin = "monitoring";
-            Ci = Utils.GetStringBetween(args[7], "Host: ", "Severity:");
-            Urgency = CheckUrgency(Utils.GetStringBetween(args[7], "Severity: ", "Original"));
-            Team = Utils.GetStringBetween(args[7], "Equipe: ", "Impact:");
+            Team = Utils.GetStringBetween(args[7], "Equipe:", "Host:");
+            Ci = Utils.GetStringBetween(args[7], Team + " Host:", "Severidade:");
+            Urgency = CheckUrgency(Utils.GetStringBetween(args[7], "Severidade:", "Impacto:"));
             Title = Ci;
-            Impact = Utils.GetNumberInString(args[7], "Impact: ");
+            Impact = Utils.GetStringBetween(args[7], "Impacto:", "");
             Status = "dispatched";
             Comment = Ci;
         }
