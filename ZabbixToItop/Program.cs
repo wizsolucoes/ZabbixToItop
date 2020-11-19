@@ -15,11 +15,10 @@ namespace ZabbixToItop
             {
                 if (args.Length == 12) 
                 {
-                    var log = new Log("ZabbixToItop.log", args[4]);
-                    var config = new RequestSettings(args);
-                    config.LogConfiguration();
+                    var log = new Log("ZabbixToItop.log", args);
+                    var settings = new RequestSettings(args);
                     var itop = new Itop(args);
-                    string ticketJson = Helper.ObjectToJson(await itop.GenerateTicketAsync(config));
+                    string ticketJson = Helper.ObjectToJson(await itop.GenerateTicketAsync(settings));
                     Log.WriteText("Save ticket response = " + await itop.SaveTicketAsync(ticketJson));
                 }
                 else

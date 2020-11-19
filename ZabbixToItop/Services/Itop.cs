@@ -38,20 +38,20 @@ namespace ZabbixToItop.Services
             Itop_pwd = args[2];
         }
 
-        public async Task<Ticket> GenerateTicketAsync(RequestSettings config)
+        public async Task<Ticket> GenerateTicketAsync(RequestSettings settings)
         {
-            var fields = new TicketFields(config);
+            var fields = new TicketFields(settings);
             
-            if(config.Service_subcategory_name == null)
+            if(settings.Service_subcategory_name == null)
             {
-                fields.Servicesubcategory_id = await GetServiceSubcategoryByCIAsync(config.Ci);
+                fields.Servicesubcategory_id = await GetServiceSubcategoryByCIAsync(settings.Ci);
             }
 
             var ticket = new Ticket
             {
-                Class = config.Class,
-                Status = config.Status,
-                Comment = config.Comment,
+                Class = settings.Class,
+                Status = settings.Status,
+                Comment = settings.Comment,
                 Operation = "core/create",
                 Output_fields = "id",
                 Fields = fields

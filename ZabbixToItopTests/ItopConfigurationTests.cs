@@ -15,36 +15,21 @@ namespace ZabbixToItopTests
         {
             string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^MHost: Cluster1^M Severidade: Disaster^M Impacto: 2" };
 
-            var config = new RequestSettings(args);
+            var settings = new RequestSettings(args);
 
-            Assert.AreEqual(null, config.Service_name);
-            Assert.AreEqual(null, config.Service_subcategory_name);
-            Assert.AreEqual("Cluster1", config.Title);
-            Assert.AreEqual(null, config.Resource_group_name);
-            Assert.AreEqual("Cluster1", config.Comment);
-            Assert.AreEqual("monitoring", config.Origin);
-            Assert.AreEqual("Helpdesk", config.Team);
-            Assert.AreEqual("Description", config.Description);
-            Assert.AreEqual("Cluster1", config.Ci);
-            Assert.AreEqual("4", config.Urgency);
-            Assert.AreEqual("2", config.Impact);
-            Assert.AreEqual("UserRequest", config.Class);
-            Assert.AreEqual("dispatched", config.Status);
-        }
-
-        [TestMethod]
-        public void Should_Assert_Urgency_Value_Correctly()
-        {
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
-
-            var config = new RequestSettings(args);
-
-            Assert.AreEqual("0", config.CheckUrgency("Not classified"));
-            Assert.AreEqual("0", config.CheckUrgency("Information"));
-            Assert.AreEqual("1", config.CheckUrgency("Warning"));
-            Assert.AreEqual("2", config.CheckUrgency("Average"));
-            Assert.AreEqual("3", config.CheckUrgency("High"));
-            Assert.AreEqual("4", config.CheckUrgency("Disaster"));
+            Assert.AreEqual(null, settings.Service_name);
+            Assert.AreEqual(null, settings.Service_subcategory_name);
+            Assert.AreEqual("Cluster1", settings.Title);
+            Assert.AreEqual(null, settings.Resource_group_name);
+            Assert.AreEqual("Cluster1", settings.Comment);
+            Assert.AreEqual("monitoring", settings.Origin);
+            Assert.AreEqual("Helpdesk", settings.Team);
+            Assert.AreEqual("Description", settings.Description);
+            Assert.AreEqual("Cluster1", settings.Ci);
+            Assert.AreEqual("Disaster", settings.Urgency);
+            Assert.AreEqual("2", settings.Impact);
+            Assert.AreEqual("UserRequest", settings.Class);
+            Assert.AreEqual("dispatched", settings.Status);
         }
     }
 }

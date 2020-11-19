@@ -11,52 +11,11 @@ namespace ZabbixToItop.Settings
             Origin = "monitoring";
             Team = Helper.GetStringBetween(args[7], "Equipe:", "Host:");
             Ci = Helper.GetStringBetween(args[7], Team + "Host:", "Severidade:");
-            Urgency = CheckUrgency(Helper.GetStringBetween(args[7], "Severidade:", "Impacto:"));
+            Urgency = Helper.GetStringBetween(args[7], "Severidade:", "Impacto:");
             Title = Ci;
             Impact = Helper.GetStringBetween(args[7], "Impacto:", "");
             Status = "dispatched";
             Comment = Ci;
-        }
-
-        public void LogConfiguration()
-        {
-            Log.WriteText("Class = " + Class);
-            Log.WriteText("Description = " + Description);
-            Log.WriteText("Origin = " + Origin);
-            Log.WriteText("CI = " + Ci);
-            Log.WriteText("Urgency = " + Urgency);
-            Log.WriteText("Team = " + Team);
-            Log.WriteText("Impact = " + Impact);
-        }
-
-        public string CheckUrgency(string urgency)
-        {
-            urgency = urgency.Trim();
-            if (urgency.Equals("Not classified"))
-            {
-                urgency = "0";
-            }
-            else if(urgency.Equals("Information"))
-            {
-                urgency = "0";
-            }
-            else if(urgency.Equals("Warning"))
-            {
-                urgency = "1";
-            }
-            else if(urgency.Equals("Average"))
-            {
-                urgency = "2";
-            }
-            else if(urgency.Equals("High"))
-            {
-                urgency = "3";
-            }
-            else if(urgency.Equals("Disaster"))
-            {
-                urgency = "4";
-            }
-            return urgency;
         }
 
         public string Service_name { get; set; } 

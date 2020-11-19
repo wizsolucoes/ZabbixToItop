@@ -23,6 +23,16 @@ namespace ZabbixToItop.Util
             WriteText("-------------------- " + DateTime.Now + " --------------------");
         }
 
+        public Log(string fileName, string[] args)
+        {
+            FileName = fileName;
+            CurrentDirectory = args[4];
+            WriteText("-------------------- " + DateTime.Now + " --------------------");
+            WriteText("arg1 = " + args[5]);
+            WriteText("arg2 = " + args[6]);
+            WriteText("arg3 = " + args[7]);
+        }
+
         public static void WriteText(string text)
         {
             var completePath = CurrentDirectory + "/" + FileName;
