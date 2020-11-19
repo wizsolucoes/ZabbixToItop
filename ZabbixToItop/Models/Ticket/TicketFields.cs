@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using ZabbixToItop.Services;
+using ZabbixToItop.Settings;
 
 namespace ZabbixToItop.Models
 {
@@ -8,7 +7,7 @@ namespace ZabbixToItop.Models
     {
         public TicketFields() { }
 
-        public TicketFields(ItopConfiguration config)
+        public TicketFields(RequestSettings config)
         {
             Origin = config.Origin;
             Contacts_list = new List<string> { config.Team };

@@ -69,7 +69,7 @@ namespace ZabbixToItopTests
             Assert.AreEqual("Error teste", teams.Message);
             Assert.AreEqual("100", teams.ErrorCode);
             Assert.AreEqual("https://testes.com", teams.TeamsUrl);
-            Assert.AreEqual("ZabbixToItop.Models.ItopException: Error teste", teams.Body);
+            Assert.AreEqual("ZabbixToItop.Exceptions.ItopException: Error teste", teams.Body);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace ZabbixToItopTests
             Assert.AreEqual("Error teste", teams.Message);
             Assert.AreEqual("100", teams.ErrorCode);
             Assert.AreEqual("https://testes.com", teams.TeamsUrl);
-            Assert.AreEqual("ZabbixToItop.Models.ItopException: Error teste", teams.Body);
+            Assert.AreEqual("ZabbixToItop.Exceptions.ItopException: Error teste", teams.Body);
         }
 
         [TestMethod]

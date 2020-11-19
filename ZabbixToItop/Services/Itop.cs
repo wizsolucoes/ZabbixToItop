@@ -4,6 +4,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using ZabbixToItop.Models;
 using ZabbixToItop.Exceptions;
+using ZabbixToItop.Settings;
+using ZabbixToItop.Util;
 
 namespace ZabbixToItop.Services
 {
@@ -36,7 +38,7 @@ namespace ZabbixToItop.Services
             Itop_pwd = args[2];
         }
 
-        public async Task<Ticket> GenerateTicketAsync(ItopConfiguration config)
+        public async Task<Ticket> GenerateTicketAsync(RequestSettings config)
         {
             var fields = new TicketFields(config);
             
@@ -70,7 +72,7 @@ namespace ZabbixToItop.Services
 
             var response = await Client.PostAsync(Itop_url, requestBody);
 
-            var itopResponse = Utils.FormatItopResponse(await response.Content.ReadAsStringAsync());
+            var itopResponse = Helper.FormatItopResponse(await response.Content.ReadAsStringAsync());
 
             if (itopResponse.code != 0)
             {

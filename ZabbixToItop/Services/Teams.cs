@@ -4,6 +4,7 @@ using ZabbixToItop.Models;
 using ZabbixToItop.Exceptions;
 using System;
 using System.Net.Http;
+using ZabbixToItop.Util;
 
 namespace ZabbixToItop.Services
 {

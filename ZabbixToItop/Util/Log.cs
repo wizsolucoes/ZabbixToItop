@@ -2,7 +2,7 @@ using System;
 using System.Text;
 using System.IO;
 
-namespace ZabbixToItop.Services
+namespace ZabbixToItop.Util
 {
     public class Log
     {

@@ -1,19 +1,19 @@
-﻿using System;
-using ZabbixToItop.Services;
-namespace ZabbixToItop.Models
+﻿using ZabbixToItop.Util;
+
+namespace ZabbixToItop.Settings
 {
-    public class ItopConfiguration
+    public class RequestSettings
     {
-        public ItopConfiguration(string[] args)
+        public RequestSettings(string[] args)
         {
             Class = args[5];  
             Description = args[6]; 
             Origin = "monitoring";
-            Team = Utils.GetStringBetween(args[7], "Equipe:", "Host:");
-            Ci = Utils.GetStringBetween(args[7], Team + "Host:", "Severidade:");
-            Urgency = CheckUrgency(Utils.GetStringBetween(args[7], "Severidade:", "Impacto:"));
+            Team = Helper.GetStringBetween(args[7], "Equipe:", "Host:");
+            Ci = Helper.GetStringBetween(args[7], Team + "Host:", "Severidade:");
+            Urgency = CheckUrgency(Helper.GetStringBetween(args[7], "Severidade:", "Impacto:"));
             Title = Ci;
-            Impact = Utils.GetStringBetween(args[7], "Impacto:", "");
+            Impact = Helper.GetStringBetween(args[7], "Impacto:", "");
             Status = "dispatched";
             Comment = Ci;
         }

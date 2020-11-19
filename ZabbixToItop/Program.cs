@@ -1,8 +1,9 @@
 ﻿using ZabbixToItop.Services;
-using ZabbixToItop.Models;
+using ZabbixToItop.Settings;
 using ZabbixToItop.Exceptions;
 using System.Threading.Tasks;
 using System;
+using ZabbixToItop.Util;
 
 namespace ZabbixToItop
 {
@@ -15,10 +16,10 @@ namespace ZabbixToItop
                 if (args.Length == 12) 
                 {
                     var log = new Log("ZabbixToItop.log", args[4]);
-                    var config = new ItopConfiguration(args);
+                    var config = new RequestSettings(args);
                     config.LogConfiguration();
                     var itop = new Itop(args);
-                    string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
+                    string ticketJson = Helper.ObjectToJson(await itop.GenerateTicketAsync(config));
                     Log.WriteText("Save ticket response = " + await itop.SaveTicketAsync(ticketJson));
                 }
                 else

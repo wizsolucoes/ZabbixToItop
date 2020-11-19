@@ -5,9 +5,9 @@ using System.Text.Json;
 using ZabbixToItop.Models;
 using System.Configuration;
 
-namespace ZabbixToItop.Services
+namespace ZabbixToItop.Util
 {
-    public class Utils 
+    public class Helper 
     {
         public static string ObjectToJson(Object obj)
         {

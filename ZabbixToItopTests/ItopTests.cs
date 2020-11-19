@@ -8,6 +8,8 @@ using ZabbixToItop.Services;
 using ZabbixToItop.Exceptions;
 using Moq;
 using Moq.Protected;
+using ZabbixToItop.Settings;
+using ZabbixToItop.Util;
 
 namespace ZabbixToItopTests
 {
@@ -34,7 +36,7 @@ namespace ZabbixToItopTests
             var httpClient = new HttpClient(handlerMock.Object);
 
             string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^MHost: Cluster1^M Severidade: Disaster^M Impacto: 2"};
-            var config = new ItopConfiguration(args);
+            var config = new RequestSettings(args);
 
             var itop = new Itop(args, httpClient);
 
@@ -65,9 +67,9 @@ namespace ZabbixToItopTests
 
             string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^MHost: Cluster1^M Severidade: Disaster^M Impacto: 2" };
 
-            ItopConfiguration config = new ItopConfiguration(args);
+            var config = new RequestSettings(args);
             var itop = new Itop(args, httpClient);
-            string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
+            string ticketJson = Helper.ObjectToJson(await itop.GenerateTicketAsync(config));
             var result = await itop.SaveTicketAsync(ticketJson);
             Assert.AreEqual("code:0 message:created", result);
         }
@@ -93,9 +95,9 @@ namespace ZabbixToItopTests
             var httpClient = new HttpClient(handlerMock.Object);
 
             string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
-            ItopConfiguration config = new ItopConfiguration(args);
+            var config = new RequestSettings(args);
             var itop = new Itop(args, httpClient);
-            string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
+            string ticketJson = Helper.ObjectToJson(await itop.GenerateTicketAsync(config));
             var result = await itop.SaveTicketAsync(ticketJson);
         }
 
@@ -119,7 +121,7 @@ namespace ZabbixToItopTests
             var httpClient = new HttpClient(handlerMock.Object);
 
             string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
-            ItopConfiguration config = new ItopConfiguration(args);
+            var config = new RequestSettings(args);
             var itop = new Itop(args, httpClient);
             var result = await itop.GetServiceSubcategoryByCIAsync(config.Ci);
             Assert.AreEqual("SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='15'", result);
@@ -146,7 +148,7 @@ namespace ZabbixToItopTests
             var httpClient = new HttpClient(handlerMock.Object);
 
             string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
-            ItopConfiguration config = new ItopConfiguration(args);
+            var config = new RequestSettings(args);
             var itop = new Itop(args, httpClient);
             var result = await itop.GetServiceSubcategoryByCIAsync(config.Ci);
         }
@@ -171,7 +173,7 @@ namespace ZabbixToItopTests
             var httpClient = new HttpClient(handlerMock.Object);
 
             string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
-            ItopConfiguration config = new ItopConfiguration(args);
+            var config = new RequestSettings(args);
 
             var itop = new Itop(args, httpClient);
 

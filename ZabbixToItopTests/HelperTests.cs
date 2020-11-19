@@ -2,12 +2,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using ZabbixToItop.Models;
-using ZabbixToItop.Services;
+using ZabbixToItop.Util;
 
 namespace ZabbixToItopTests
 {
     [TestClass]
-    public class UtilsTests
+    public class HeperTests
     {
         [TestMethod]
         public void Should_Convert_Ticket_Oject_To_JSON()
@@ -33,7 +33,7 @@ namespace ZabbixToItopTests
                 Fields = fields
             };
 
-            string ticketJson = Utils.ObjectToJson(ticket);
+            string ticketJson = Helper.ObjectToJson(ticket);
             ticketJson = ticketJson.Replace(System.Environment.NewLine, "");
             ticketJson = new Regex("[ ]{2,}", RegexOptions.None).Replace(ticketJson, " ");
 
@@ -47,7 +47,7 @@ namespace ZabbixToItopTests
         {
             Ticket ticket = new Ticket();
 
-            string ticketJson = Utils.ObjectToJson(ticket);
+            string ticketJson = Helper.ObjectToJson(ticket);
             ticketJson = ticketJson.Replace(System.Environment.NewLine, "");
             ticketJson = new Regex("[ ]{2,}", RegexOptions.None).Replace(ticketJson, " ");
 
@@ -61,7 +61,7 @@ namespace ZabbixToItopTests
         {
             string successItopMessage = "{\"objects\":{\"UserRequest::48\":{\"code\":0,\"message\":\"created\",\"class\":\"UserRequest\",\"key\":\"48\",\"fields\":{\"id\":\"48\"}}},\"code\":0,\"message\":null}";
 
-            ItopResponse utilsResponse = Utils.FormatItopResponse(successItopMessage);
+            ItopResponse utilsResponse = Helper.FormatItopResponse(successItopMessage);
 
             Assert.AreEqual(0, utilsResponse.code);
             Assert.AreEqual("created", utilsResponse.message);
@@ -72,7 +72,7 @@ namespace ZabbixToItopTests
         {
             string successItopMessage = "{\"code\":100,\"message\":\"Error: Missing parameter 'operation'\"}";
 
-            ItopResponse utilsResponse = Utils.FormatItopResponse(successItopMessage);
+            ItopResponse utilsResponse = Helper.FormatItopResponse(successItopMessage);
 
             Assert.AreEqual(100, utilsResponse.code);
             Assert.AreEqual("Error: Missing parameter 'operation'", utilsResponse.message);
@@ -81,7 +81,7 @@ namespace ZabbixToItopTests
         [TestMethod]
         public void Should_Get_The_Correct_Value_From_String()
         {
-            var response = Utils.GetStringBetween("Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^M Host: Cluster1^M Severidade: Disaster^M Impacto: 2", "Equipe:", "Host:");
+            var response = Helper.GetStringBetween("Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^M Host: Cluster1^M Severidade: Disaster^M Impacto: 2", "Equipe:", "Host:");
             Assert.AreEqual("Helpdesk", response);
         }
 
