@@ -1,6 +1,7 @@
 using System.Text;
 using System.Collections.Generic;
 using ZabbixToItop.Models;
+using ZabbixToItop.Exceptions;
 using System;
 using System.Net.Http;
 

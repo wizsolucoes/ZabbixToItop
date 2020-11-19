@@ -2,13 +2,11 @@
 using Moq;
 using Moq.Protected;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ZabbixToItop.Models;
+using ZabbixToItop.Exceptions;
 using ZabbixToItop.Services;
 
 namespace ZabbixToItopTests
@@ -39,10 +37,10 @@ namespace ZabbixToItopTests
             var teams = new Teams(exception, "https://testes.com", httpClient);
             teams.SendErrorAsync();
 
-            Assert.AreEqual(teams.Message, "Error teste");
-            Assert.AreEqual(teams.ErrorCode, "");
-            Assert.AreEqual(teams.TeamsUrl, "https://testes.com");
-            Assert.AreEqual(teams.Body, "System.Exception: Error teste");
+            Assert.AreEqual("Error teste", teams.Message);
+            Assert.AreEqual("", teams.ErrorCode);
+            Assert.AreEqual("https://testes.com", teams.TeamsUrl);
+            Assert.AreEqual("System.Exception: Error teste", teams.Body);
         }
 
         [TestMethod]
@@ -68,10 +66,10 @@ namespace ZabbixToItopTests
             var teams = new Teams(exception, "https://testes.com", httpClient);
             teams.SendErrorAsync();
 
-            Assert.AreEqual(teams.Message, "Error teste");
-            Assert.AreEqual(teams.ErrorCode, "100");
-            Assert.AreEqual(teams.TeamsUrl, "https://testes.com");
-            Assert.AreEqual(teams.Body, "ZabbixToItop.Models.ItopException: Error teste");
+            Assert.AreEqual("Error teste", teams.Message);
+            Assert.AreEqual("100", teams.ErrorCode);
+            Assert.AreEqual("https://testes.com", teams.TeamsUrl);
+            Assert.AreEqual("ZabbixToItop.Models.ItopException: Error teste", teams.Body);
         }
 
         [TestMethod]
@@ -80,10 +78,10 @@ namespace ZabbixToItopTests
             var exception = new ItopException("Error teste", 100);
             var teams = new Teams(exception, "https://testes.com");
 
-            Assert.AreEqual(teams.Message, "Error teste");
-            Assert.AreEqual(teams.ErrorCode, "100");
-            Assert.AreEqual(teams.TeamsUrl, "https://testes.com");
-            Assert.AreEqual(teams.Body, "ZabbixToItop.Models.ItopException: Error teste");
+            Assert.AreEqual("Error teste", teams.Message);
+            Assert.AreEqual("100", teams.ErrorCode);
+            Assert.AreEqual("https://testes.com", teams.TeamsUrl);
+            Assert.AreEqual("ZabbixToItop.Models.ItopException: Error teste", teams.Body);
         }
 
         [TestMethod]
@@ -92,10 +90,10 @@ namespace ZabbixToItopTests
             var exception = new Exception("Error teste");
             var teams = new Teams(exception, "https://testes.com");
 
-            Assert.AreEqual(teams.Message, "Error teste");
-            Assert.AreEqual(teams.ErrorCode, "");
-            Assert.AreEqual(teams.TeamsUrl, "https://testes.com");
-            Assert.AreEqual(teams.Body, "System.Exception: Error teste");
+            Assert.AreEqual("Error teste", teams.Message);
+            Assert.AreEqual("", teams.ErrorCode);
+            Assert.AreEqual("https://testes.com", teams.TeamsUrl);
+            Assert.AreEqual("System.Exception: Error teste", teams.Body);
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 
-namespace ZabbixToItop.Models
+namespace ZabbixToItop.Exceptions
 {
     [ExcludeFromCodeCoverage]
     public class ItopException : Exception

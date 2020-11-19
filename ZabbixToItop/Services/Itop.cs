@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using ZabbixToItop.Models;
-using System;
+using ZabbixToItop.Exceptions;
 
 namespace ZabbixToItop.Services
 {

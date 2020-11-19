@@ -63,8 +63,8 @@ namespace ZabbixToItopTests
 
             ItopResponse utilsResponse = Utils.FormatItopResponse(successItopMessage);
 
-            Assert.AreEqual(utilsResponse.code, 0);
-            Assert.AreEqual(utilsResponse.message, "created");
+            Assert.AreEqual(0, utilsResponse.code);
+            Assert.AreEqual("created", utilsResponse.message);
         }
 
         [TestMethod]
@@ -74,8 +74,8 @@ namespace ZabbixToItopTests
 
             ItopResponse utilsResponse = Utils.FormatItopResponse(successItopMessage);
 
-            Assert.AreEqual(utilsResponse.code, 100);
-            Assert.AreEqual(utilsResponse.message, "Error: Missing parameter 'operation'");
+            Assert.AreEqual(100, utilsResponse.code);
+            Assert.AreEqual("Error: Missing parameter 'operation'", utilsResponse.message);
         }
 
         [TestMethod]

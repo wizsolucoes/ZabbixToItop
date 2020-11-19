@@ -1,14 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using ZabbixToItop.Models;
 using ZabbixToItop.Services;
+using ZabbixToItop.Exceptions;
 using Moq;
 using Moq.Protected;
 
@@ -36,15 +33,15 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^M Host: Cluster1^M Severidade: Disaster^M Impacto: 2" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^MHost: Cluster1^M Severidade: Disaster^M Impacto: 2"};
             var config = new ItopConfiguration(args);
 
             var itop = new Itop(args, httpClient);
 
             Ticket ticketJson = await itop.GenerateTicketAsync(config);
-            Assert.AreEqual(ticketJson.Class, "UserRequest");
-            Assert.AreEqual(ticketJson.Fields.Service_id, "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = 'Cluster1'");
-            Assert.AreEqual(ticketJson.Fields.Functionalcis_list[0].Functionalci_id, "SELECT FunctionalCI WHERE name='Cluster1'");
+            Assert.AreEqual("UserRequest", ticketJson.Class);
+            Assert.AreEqual("SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = 'Cluster1'", ticketJson.Fields.Service_id);
+            Assert.AreEqual("SELECT FunctionalCI WHERE name='Cluster1'", ticketJson.Fields.Functionalcis_list[0].Functionalci_id);
         }
 
         [TestMethod]
@@ -66,13 +63,13 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^MHost: Cluster1^M Severidade: Disaster^M Impacto: 2" };
 
             ItopConfiguration config = new ItopConfiguration(args);
             var itop = new Itop(args, httpClient);
             string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
             var result = await itop.SaveTicketAsync(ticketJson);
-            Assert.AreEqual(result, "code:0 message:created");
+            Assert.AreEqual("code:0 message:created", result);
         }
 
         [TestMethod]
@@ -125,7 +122,7 @@ namespace ZabbixToItopTests
             ItopConfiguration config = new ItopConfiguration(args);
             var itop = new Itop(args, httpClient);
             var result = await itop.GetServiceSubcategoryByCIAsync(config.Ci);
-            Assert.AreEqual(result, "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='15'");
+            Assert.AreEqual("SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='15'", result);
         }
 
         [TestMethod]
@@ -179,7 +176,7 @@ namespace ZabbixToItopTests
             var itop = new Itop(args, httpClient);
 
             var result = await itop.GenerateTicketAsync(config);
-            Assert.AreEqual(result.Fields.Servicesubcategory_id, "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='15'");
+            Assert.AreEqual("SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='15'", result.Fields.Servicesubcategory_id);
         }
     }
 }
