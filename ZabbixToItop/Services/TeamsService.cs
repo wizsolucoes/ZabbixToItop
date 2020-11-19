@@ -8,7 +8,7 @@ using ZabbixToItop.Util;
 
 namespace ZabbixToItop.Services
 {
-    public class Teams
+    public class TeamsService
     {
         public string Message { get; set; }
         public string ErrorCode { get; set; }
@@ -16,7 +16,7 @@ namespace ZabbixToItop.Services
         public string TeamsUrl { get; set; }
         private HttpClient Client { get; set; }
 
-        public Teams(Exception exception, string teamsUrl)
+        public TeamsService(Exception exception, string teamsUrl)
         {
             Message = exception.Message;
             ErrorCode = "";
@@ -26,7 +26,7 @@ namespace ZabbixToItop.Services
             Client = new HttpClient();
         }
 
-        public Teams(ItopException exception, string teamsUrl)
+        public TeamsService(ItopException exception, string teamsUrl)
         {
             Message = exception.Message;
             ErrorCode = exception.ErrorCode.ToString();
@@ -37,7 +37,7 @@ namespace ZabbixToItop.Services
         }
 
 
-        public Teams(Exception exception, string teamsUrl, HttpClient client)
+        public TeamsService(Exception exception, string teamsUrl, HttpClient client)
         {
             Message = exception.Message;
             ErrorCode = "";
@@ -47,7 +47,7 @@ namespace ZabbixToItop.Services
             Client = client;
         }
 
-        public Teams(ItopException exception, string teamsUrl, HttpClient client)
+        public TeamsService(ItopException exception, string teamsUrl, HttpClient client)
         {
             Message = exception.Message;
             ErrorCode = exception.ErrorCode.ToString();

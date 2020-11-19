@@ -6,6 +6,9 @@ namespace ZabbixToItop.Settings
     {
         public RequestSettings(string[] args)
         {
+            Itop_url = args[0];
+            Itop_user = args[1];
+            Itop_pwd = args[2];
             Class = args[5];  
             Description = args[6]; 
             Origin = "monitoring";
@@ -18,6 +21,9 @@ namespace ZabbixToItop.Settings
             Comment = Ci;
         }
 
+        public string Itop_url { get; set; }
+        public string Itop_user { get; set; }
+        public string Itop_pwd { get; set; }
         public string Service_name { get; set; } 
         public string Service_subcategory_name { get; set; } 
         public string Origin { get; set; } 

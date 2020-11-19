@@ -34,7 +34,7 @@ namespace ZabbixToItopTests
             var httpClient = new HttpClient(handlerMock.Object);
 
             var exception = new Exception("Error teste");
-            var teams = new Teams(exception, "https://testes.com", httpClient);
+            var teams = new TeamsService(exception, "https://testes.com", httpClient);
             teams.SendErrorAsync();
 
             Assert.AreEqual("Error teste", teams.Message);
@@ -63,7 +63,7 @@ namespace ZabbixToItopTests
             var httpClient = new HttpClient(handlerMock.Object);
 
             var exception = new ItopException("Error teste", 100);
-            var teams = new Teams(exception, "https://testes.com", httpClient);
+            var teams = new TeamsService(exception, "https://testes.com", httpClient);
             teams.SendErrorAsync();
 
             Assert.AreEqual("Error teste", teams.Message);
@@ -76,7 +76,7 @@ namespace ZabbixToItopTests
         public async Task Should_Initialize_Correctly_With_ItopException()
         {
             var exception = new ItopException("Error teste", 100);
-            var teams = new Teams(exception, "https://testes.com");
+            var teams = new TeamsService(exception, "https://testes.com");
 
             Assert.AreEqual("Error teste", teams.Message);
             Assert.AreEqual("100", teams.ErrorCode);
@@ -88,7 +88,7 @@ namespace ZabbixToItopTests
         public async Task Should_Initialize_Correctly_With_Exception()
         {
             var exception = new Exception("Error teste");
-            var teams = new Teams(exception, "https://testes.com");
+            var teams = new TeamsService(exception, "https://testes.com");
 
             Assert.AreEqual("Error teste", teams.Message);
             Assert.AreEqual("", teams.ErrorCode);
