@@ -26,25 +26,7 @@ namespace ZabbixToItop.Models
             };
             Urgency = FindUrgencyNumber(settings.Urgency);
             Impact = settings.Impact;
-
-            if (settings.Service_name == null)
-            {
-                Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '" + settings.Ci + "'";
-            }
-            else
-            {
-                Service_id = "SELECT Service WHERE name='" + settings.Service_name + "'";
-            }
-            
-            if(settings.Service_subcategory_name != null)
-            {
-                Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + settings.Service_subcategory_name + "' AND Service.name='" + settings.Service_name + "'";
-            }
-
-            if (settings.Resource_group_name != null)
-            {
-                Private_log = new ItemsList(settings.Resource_group_name);
-            }
+            Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '" + settings.Ci + "'";
         }
 
         public string FindUrgencyNumber(string urgency)
@@ -52,27 +34,27 @@ namespace ZabbixToItop.Models
             urgency = urgency.Trim();
             if (urgency.Equals("Not classified"))
             {
-                urgency = "0";
+                urgency = "4";
             }
             else if(urgency.Equals("Information"))
             {
-                urgency = "0";
+                urgency = "4";
             }
             else if(urgency.Equals("Warning"))
             {
-                urgency = "1";
+                urgency = "4";
             }
             else if(urgency.Equals("Average"))
             {
-                urgency = "2";
+                urgency = "3";
             }
             else if(urgency.Equals("High"))
             {
-                urgency = "3";
+                urgency = "2";
             }
             else if(urgency.Equals("Disaster"))
             {
-                urgency = "4";
+                urgency = "1";
             }
             return urgency;
         }
