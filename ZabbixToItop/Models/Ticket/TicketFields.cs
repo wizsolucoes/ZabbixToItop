@@ -24,12 +24,12 @@ namespace ZabbixToItop.Models
                     Impact_code = "manual"
                 }
             };
-            Urgency = FindUrgencyNumber(settings.Urgency);
+            Urgency = FindUrgencyId(settings.Urgency);
             Impact = settings.Impact;
             Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '" + settings.Ci + "'";
         }
 
-        public string FindUrgencyNumber(string urgency)
+        public string FindUrgencyId(string urgency)
         {
             urgency = urgency.Trim();
             if (urgency.Equals("Not classified"))

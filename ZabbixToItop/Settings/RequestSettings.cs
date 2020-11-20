@@ -21,6 +21,10 @@ namespace ZabbixToItop.Settings
             Comment = Ci;
         }
 
+        public RequestSettings()
+        {
+        }
+
         public string Itop_url { get; set; }
         public string Itop_user { get; set; }
         public string Itop_pwd { get; set; }

@@ -31,5 +31,19 @@ namespace ZabbixToItopTests
             Assert.AreEqual("UserRequest", settings.Class);
             Assert.AreEqual("dispatched", settings.Status);
         }
+
+        [TestMethod]
+        public void Should_Assert_Urgency_Value_Correctly()
+        {
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^MHost: Cluster1^M Severidade: Disaster^M Impacto: 2" };
+            var settings = new RequestSettings(args);
+            var fields = new TicketFields(settings);
+            Assert.AreEqual("4", fields.FindUrgencyId("Not classified"));
+            Assert.AreEqual("4", fields.FindUrgencyId("Information"));
+            Assert.AreEqual("4", fields.FindUrgencyId("Warning"));
+            Assert.AreEqual("3", fields.FindUrgencyId("Average"));
+            Assert.AreEqual("2", fields.FindUrgencyId("High"));
+            Assert.AreEqual("1", fields.FindUrgencyId("Disaster"));
+        }
     }
 }
