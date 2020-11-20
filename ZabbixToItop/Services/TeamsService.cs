@@ -57,7 +57,7 @@ namespace ZabbixToItop.Services
             Client = client;
         }
 
-        public async void SendErrorAsync()
+        public void SendError()
         {
             TeamsHook teamsHook = new TeamsHook
             {

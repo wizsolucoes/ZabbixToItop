@@ -15,7 +15,7 @@ namespace ZabbixToItopTests
     public class TeamsTests
     {
         [TestMethod]
-        public async Task Should_Send_Exception_Correctly()
+        public void Should_Send_Exception_Correctly()
         {
             var handlerMock = new Mock<HttpMessageHandler>();
             var response = new HttpResponseMessage
@@ -35,7 +35,7 @@ namespace ZabbixToItopTests
 
             var exception = new Exception("Error teste");
             var teams = new TeamsService(exception, "https://testes.com", httpClient);
-            teams.SendErrorAsync();
+            teams.SendError();
 
             Assert.AreEqual("Error teste", teams.Message);
             Assert.AreEqual("", teams.ErrorCode);
@@ -44,7 +44,7 @@ namespace ZabbixToItopTests
         }
 
         [TestMethod]
-        public async Task Should_Send_ItopException_Correctly()
+        public void Should_Send_ItopException_Correctly()
         {
             var handlerMock = new Mock<HttpMessageHandler>();
             var response = new HttpResponseMessage
@@ -64,7 +64,7 @@ namespace ZabbixToItopTests
 
             var exception = new ItopException("Error teste", 100);
             var teams = new TeamsService(exception, "https://testes.com", httpClient);
-            teams.SendErrorAsync();
+            teams.SendError();
 
             Assert.AreEqual("Error teste", teams.Message);
             Assert.AreEqual("100", teams.ErrorCode);
@@ -73,7 +73,7 @@ namespace ZabbixToItopTests
         }
 
         [TestMethod]
-        public async Task Should_Initialize_Correctly_With_ItopException()
+        public void Should_Initialize_Correctly_With_ItopException()
         {
             var exception = new ItopException("Error teste", 100);
             var teams = new TeamsService(exception, "https://testes.com");
@@ -85,7 +85,7 @@ namespace ZabbixToItopTests
         }
 
         [TestMethod]
-        public async Task Should_Initialize_Correctly_With_Exception()
+        public void Should_Initialize_Correctly_With_Exception()
         {
             var exception = new Exception("Error teste");
             var teams = new TeamsService(exception, "https://testes.com");
