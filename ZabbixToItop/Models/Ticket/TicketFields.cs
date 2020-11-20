@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using ZabbixToItop.Services;
+using ZabbixToItop.Settings;
 
 namespace ZabbixToItop.Models
 {
@@ -8,44 +7,56 @@ namespace ZabbixToItop.Models
     {
         public TicketFields() { }
 
-        public TicketFields(ItopConfiguration config)
+        public TicketFields(RequestSettings settings)
         {
-            Origin = config.Origin;
-            Contacts_list = new List<string> { config.Team };
-            Team_id = "SELECT Team WHERE name = '" + config.Team + "'";
+            Origin = settings.Origin;
+            Contacts_list = new List<string> { settings.Team };
+            Team_id = "SELECT Team WHERE name = '" + settings.Team + "'";
             Caller_id = new Caller("Processo", "Automatico");
-            Description = config.Description;
-            Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + config.Ci + "'";
-            Title = config.Title;
+            Description = settings.Description;
+            Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + settings.Ci + "'";
+            Title = settings.Title;
             Functionalcis_list = new List<Functionalcis>
             {
                 new Functionalcis
                 {
-                    Functionalci_id = "SELECT FunctionalCI WHERE name='" + config.Ci + "'",
+                    Functionalci_id = "SELECT FunctionalCI WHERE name='" + settings.Ci + "'",
                     Impact_code = "manual"
                 }
             };
-            Urgency = config.Urgency;
-            Impact = config.Impact;
+            Urgency = FindUrgencyId(settings.Urgency);
+            Impact = settings.Impact;
+            Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '" + settings.Ci + "'";
+        }
 
-            if (config.Service_name == null)
+        public string FindUrgencyId(string urgency)
+        {
+            urgency = urgency.Trim();
+            if (urgency.Equals("Not classified"))
             {
-                Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '" + config.Ci + "'";
+                urgency = "4";
             }
-            else
+            else if(urgency.Equals("Information"))
             {
-                Service_id = "SELECT Service WHERE name='" + config.Service_name + "'";
+                urgency = "4";
             }
-            
-            if(config.Service_subcategory_name != null)
+            else if(urgency.Equals("Warning"))
             {
-                Servicesubcategory_id = "SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='" + config.Service_subcategory_name + "' AND Service.name='" + config.Service_name + "'";
+                urgency = "4";
             }
-
-            if (config.Resource_group_name != null)
+            else if(urgency.Equals("Average"))
             {
-                Private_log = new ItemsList(config.Resource_group_name);
+                urgency = "3";
             }
+            else if(urgency.Equals("High"))
+            {
+                urgency = "2";
+            }
+            else if(urgency.Equals("Disaster"))
+            {
+                urgency = "1";
+            }
+            return urgency;
         }
 
         public string Org_id { get; set; }

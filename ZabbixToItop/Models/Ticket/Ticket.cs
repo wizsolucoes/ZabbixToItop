@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using ZabbixToItop.Settings;
 
 namespace ZabbixToItop.Models
 {
@@ -16,6 +14,16 @@ namespace ZabbixToItop.Models
             this.Comment = comment;
             this.Output_fields = output_fields;
             this.Fields = fields;
+        }
+
+        public Ticket(RequestSettings settings)
+        {
+            Class = settings.Class;
+            Status = settings.Status;
+            Comment = settings.Comment;
+            Operation = "core/create";
+            Output_fields = "id";
+            Fields = new TicketFields(settings);
         }
 
         public string Operation { get; set; }

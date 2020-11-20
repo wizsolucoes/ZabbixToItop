@@ -1,7 +1,8 @@
 ﻿using ZabbixToItop.Services;
-using ZabbixToItop.Models;
+using ZabbixToItop.Exceptions;
 using System.Threading.Tasks;
 using System;
+using ZabbixToItop.Util;
 
 namespace ZabbixToItop
 {
@@ -11,14 +12,12 @@ namespace ZabbixToItop
         {
             try
             {
-                if (args.Length == 12) 
+                if (args.Length == 8) 
                 {
-                    var log = new Log("ZabbixToItop.log", args[4]);
-                    Log.WriteText("-------------------- " + DateTime.Now + " --------------------");
-                    var config = new ItopConfiguration(args);
-                    var itop = new Itop(args);
-                    string ticketJson = Utils.ObjectToJson(await itop.GenerateTicketAsync(config));
-                    Log.WriteText("Save ticket response = " + await itop.SaveTicketAsync(ticketJson));
+                    var log = new Log("ZabbixToItop.log", args);
+                    var itopService = new ItopService(args);
+                    var response = await itopService.SaveTicketAsync();
+                    Log.WriteText("Save ticket response = " + response);
                 }
                 else
                 {
@@ -28,14 +27,14 @@ namespace ZabbixToItop
             catch (ItopException itopException)
             {
                 Log.WriteText("Exception = " + itopException.ToString());
-                Teams teams = new Teams(itopException, args[3]);
-                teams.SendErrorAsync();
+                var teamsService = new TeamsService(itopException, args[3]);
+                teamsService.SendErrorAsync();
             }
             catch (Exception exception)
             {
                 Log.WriteText("Exception = " + exception.ToString());
-                Teams teams = new Teams(exception, args[3]);
-                teams.SendErrorAsync();
+                var teamsService = new TeamsService(exception, args[3]);
+                teamsService.SendErrorAsync();
             }
 
         }
