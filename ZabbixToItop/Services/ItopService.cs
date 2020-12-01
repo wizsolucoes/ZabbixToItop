@@ -35,6 +35,8 @@ namespace ZabbixToItop.Services
             var ticket = new Ticket(Settings);
             string ticketJson = Helper.ObjectToJson(ticket);
 
+            Log.WriteText("user:"+Settings.Itop_user);
+            Log.WriteText("pwd:"+Settings.Itop_pwd);
             var values = new Dictionary<string, string>
             {
                 { "auth_pwd", Settings.Itop_pwd },
