@@ -19,8 +19,8 @@ namespace ZabbixToItop.Settings
             Impact = Helper.GetStringBetween(args[7], "Impacto:", "");
             Status = "dispatched";
             Comment = Ci;
-            Service_name = args[7];
-            Service_subcategory_name = args[8];
+            Service_name = args[8];
+            Service_subcategory_name = args[9];
         }
 
         public RequestSettings()
