@@ -39,8 +39,8 @@ namespace ZabbixToItop.Services
             Log.WriteText("pwd:"+Settings.Itop_pwd);
             var values = new Dictionary<string, string>
             {
-                { "auth_pwd", Settings.Itop_pwd },
-                { "auth_user", Settings.Itop_user },
+                { "auth_pwd", "Usuario@123456" },
+                { "auth_user", "teste" },
                 { "json_data", ticketJson }
             };
 
