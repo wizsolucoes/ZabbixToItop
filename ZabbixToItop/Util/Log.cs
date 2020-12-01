@@ -31,8 +31,6 @@ namespace ZabbixToItop.Util
             WriteText("arg1 = " + args[5]);
             WriteText("arg2 = " + args[6]);
             WriteText("arg3 = " + args[7]);
-            WriteText("arg3 = " + args[8]);
-            WriteText("arg3 = " + args[9]);
         }
 
         public static void WriteText(string text)
