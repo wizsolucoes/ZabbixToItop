@@ -16,11 +16,11 @@ namespace ZabbixToItop.Settings
             Ci = Helper.GetStringBetween(args[7], Team + "Host:", "Severidade:");
             Urgency = Helper.GetStringBetween(args[7], "Severidade:", "Impacto:");
             Title = Ci;
-            Impact = Helper.GetStringBetween(args[7], "Impacto:", "");
+            Impact = Helper.GetStringBetween(args[7], "Impacto:", "SERVICE");
             Status = "dispatched";
             Comment = Ci;
-            Service_name = args[8];
-            Service_subcategory_name = args[9];
+            Service_name = Helper.GetStringBetween(args[7], "SERVICE:", "SERVICE_SUBCATEGORY");
+            Service_subcategory_name = Helper.GetStringBetween(args[7], "SERVICE_SUBCATEGORY:", "");
         }
 
         public RequestSettings()
