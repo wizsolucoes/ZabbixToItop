@@ -28,6 +28,11 @@ namespace ZabbixToItop.Util
             FileName = fileName;
             CurrentDirectory = args[4];
             WriteText("-------------------- " + DateTime.Now + " --------------------");
+            WriteText("arr0 = " + args[0]);
+            WriteText("arr1 = " + args[1]);
+            WriteText("arr2 = " + args[2]);
+            WriteText("arr3 = " + args[3]);
+            WriteText("arr4 = " + args[4]);
             WriteText("arg1 = " + args[5]);
             WriteText("arg2 = " + args[6]);
             WriteText("arg3 = " + args[7]);
