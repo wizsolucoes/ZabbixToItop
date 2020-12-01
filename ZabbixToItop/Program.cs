@@ -28,13 +28,13 @@ namespace ZabbixToItop
             {
                 Log.WriteText("Exception = " + itopException.ToString());
                 var teamsService = new TeamsService(itopException, args[3]);
-                teamsService.SendErrorAsync();
+                teamsService.SendError();
             }
             catch (Exception exception)
             {
                 Log.WriteText("Exception = " + exception.ToString());
                 var teamsService = new TeamsService(exception, args[3]);
-                teamsService.SendErrorAsync();
+                teamsService.SendError();
             }
 
         }
