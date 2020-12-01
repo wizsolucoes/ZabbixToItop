@@ -12,7 +12,7 @@ namespace ZabbixToItop
         {
             try
             {
-                if (args.Length == 10) 
+                if (args.Length == 8) 
                 {
                     var log = new Log("ZabbixToItop.log", args);
                     var itopService = new ItopService(args);
