@@ -26,7 +26,8 @@ namespace ZabbixToItop.Models
             };
             Urgency = FindUrgencyId(settings.Urgency);
             Impact = settings.Impact;
-            Service_id = "SELECT Service AS serv JOIN lnkFunctionalCIToService AS lnk ON lnk.service_id = serv.id WHERE functionalci_id_friendlyname = '" + settings.Ci + "'";
+            Service_id="SELECT Service WHERE name='"+settings.Service_name+"'";
+            Servicesubcategory_id="SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='"+settings.Service_subcategory_name+"' AND Service.name='"+settings.Service_name+"'";
         }
 
         public string FindUrgencyId(string urgency)

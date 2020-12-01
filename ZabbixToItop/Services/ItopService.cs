@@ -33,7 +33,6 @@ namespace ZabbixToItop.Services
         public async Task<string> SaveTicketAsync()
         {
             var ticket = new Ticket(Settings);
-            ticket.Fields.Servicesubcategory_id = await GetServiceSubcategoryByCIAsync(Settings.Ci);
             string ticketJson = Helper.ObjectToJson(ticket);
 
             var values = new Dictionary<string, string>
