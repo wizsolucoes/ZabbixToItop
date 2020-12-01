@@ -12,14 +12,14 @@ namespace ZabbixToItop.Settings
             Class = args[5];  
             Description = args[6]; 
             Origin = "monitoring";
-            Team = Helper.GetStringBetween(args[7], "Equipe:", "Host:");
-            Ci = Helper.GetStringBetween(args[7], Team + "Host:", "Severidade:");
-            Urgency = Helper.GetStringBetween(args[7], "Severidade:", "Impacto:");
+            Team = Helper.GetStringBetween(args[7], "EQUIPE:", ", IMPACTO:");
+            Ci = Helper.GetStringBetween(args[7], Team + "Host:", "Severity:");
+            Urgency = Helper.GetStringBetween(args[7], "Severity:", "EQUIPE:");
             Title = Ci;
-            Impact = Helper.GetStringBetween(args[7], "Impacto:", "SERVICE:");
+            Impact = Helper.GetStringBetween(args[7], "IMPACTO:", ", SERVICE:");
             Status = "dispatched";
             Comment = Ci;
-            Service_name = Helper.GetStringBetween(args[7], "SERVICE:", "SERVICE_SUBCATEGORY:");
+            Service_name = Helper.GetStringBetween(args[7], "SERVICE:", ", SERVICE_SUBCATEGORY:");
             Service_subcategory_name = Helper.GetStringBetween(args[7], "SERVICE_SUBCATEGORY:", "");
         }
 
