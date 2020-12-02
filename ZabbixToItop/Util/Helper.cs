@@ -33,7 +33,7 @@ namespace ZabbixToItop.Util
         {
             str = str.Replace("^M", "");
             str = str.Replace(System.Environment.NewLine, "");
-            str = new Regex("[^a-zA-Z0-9 -:]").Replace(str, "");
+            str = new Regex("[^a-zA-Z0-9 -:_]").Replace(str, "");
             str = new Regex("[ ]{2,}", RegexOptions.None).Replace(str, " ");
             return Regex.Match(str, @str1 + "(.*)" + str2).Groups[1].Value.Trim();
         }
