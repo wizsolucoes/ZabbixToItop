@@ -15,6 +15,7 @@ namespace ZabbixToItop
                 if (args.Length == 8) 
                 {
                     var log = new Log("ZabbixToItop.log", args);
+                    Log.WriteText("args = " + String.Join(" ", args));
                     var itopService = new ItopService(args);
                     var response = await itopService.SaveTicketAsync();
                     Log.WriteText("Save ticket response = " + response);

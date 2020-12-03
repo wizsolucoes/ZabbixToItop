@@ -20,7 +20,7 @@ namespace ZabbixToItop.Settings
             Status = "dispatched";
             Comment = Ci;
             Service_name = Helper.GetStringBetween(args[7], "SERVICE:", ", SERVICESUBCATEGORY:");
-            Service_subcategory_name = args[7].Split("SERVICESUBCATEGORY:")[1];
+            Service_subcategory_name = args[7].Split("SERVICESUBCATEGORY:")[1];     
             Log.WriteText("Team = " + Team);
             Log.WriteText("Ci = " + Ci);
             Log.WriteText("Urgency = " + Urgency);

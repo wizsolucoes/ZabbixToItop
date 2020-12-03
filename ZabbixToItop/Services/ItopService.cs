@@ -6,7 +6,7 @@ using ZabbixToItop.Models;
 using ZabbixToItop.Exceptions;
 using ZabbixToItop.Settings;
 using ZabbixToItop.Util;
-
+using System;
 namespace ZabbixToItop.Services
 {
     public class ItopService
@@ -37,8 +37,8 @@ namespace ZabbixToItop.Services
 
             var values = new Dictionary<string, string>
             {
-                { "auth_pwd", "Usuario@123456" },
-                { "auth_user", "restserveruser" },
+                { "auth_pwd", Settings.Itop_pwd.Trim() },
+                { "auth_user", Settings.Itop_user.Trim() },
                 { "json_data", ticketJson }
             };
 
