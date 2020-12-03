@@ -28,13 +28,13 @@ namespace ZabbixToItop.Util
 
             return itopResponse;
         }
-
+ 
         public static string GetStringBetween(string str, string str1, string str2)
         {
             str = str.Replace("^M", "");
             str = str.Replace(System.Environment.NewLine, "");
-            str = new Regex("[^a-zA-Z0-9 -:_]").Replace(str, "");
             str = new Regex("[ ]{2,}", RegexOptions.None).Replace(str, " ");
+            Log.WriteText("rp = " + str);
             return Regex.Match(str, @str1 + "(.*)" + str2).Groups[1].Value.Trim();
         }
 
