@@ -104,14 +104,14 @@ namespace ZabbixToItop.Services
                     }
                 }
             };
-/* 
+
             var json = Helper.ObjectToJson(teamsHook);
 
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
             var result = Client.PostAsync(TeamsUrl, content).Result;
 
-            Log.WriteText(result.Content.ReadAsStringAsync().Result); */
+            Log.WriteText(result.Content.ReadAsStringAsync().Result);
         }
     }
 }
