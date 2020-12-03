@@ -35,7 +35,7 @@ namespace ZabbixToItop.Util
 
         public static void WriteText(string text)
         {
-            var completePath = CurrentDirectory + "/" + FileName;
+            var completePath = Path.Combine(CurrentDirectory, FileName);
             text += "\n";
 
             using (FileStream SourceStream = File.Open(completePath, FileMode.OpenOrCreate))
