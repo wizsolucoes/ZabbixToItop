@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace ZabbixToItop.Util
 {
-    public class Helper 
+    public class Helper
     {
         public static string ObjectToJson(Object obj)
         {
@@ -28,14 +28,22 @@ namespace ZabbixToItop.Util
 
             return itopResponse;
         }
- 
-        public static string GetStringBetween(string str, string str1, string str2)
+
+        public static string GetStringBetween(string text, string left, string right)
         {
-            str = str.Replace("^M", "");
-            str = str.Replace(System.Environment.NewLine, "");
-            str = new Regex("[ ]{2,}", RegexOptions.None).Replace(str, " ");
-            Log.WriteText("rp = " + str);
-            return Regex.Match(str, @str1 + "(.*)" + str2).Groups[1].Value.Trim();
+            // TODO: Validate input arguments
+
+            int beginIndex = text.IndexOf(left); // find occurence of left delimiter
+            if (beginIndex == -1)
+                return string.Empty; // or throw exception?
+
+            beginIndex += left.Length;
+
+            int endIndex = text.IndexOf(right, beginIndex); // find occurence of right delimiter
+            if (endIndex == -1)
+                return string.Empty; // or throw exception?
+
+            return text.Substring(beginIndex, endIndex - beginIndex).Trim();
         }
 
     }
