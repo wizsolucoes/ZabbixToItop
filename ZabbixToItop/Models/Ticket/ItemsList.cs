@@ -11,7 +11,7 @@ namespace ZabbixToItop.Models
         public ItemsList() { }
         public ItemsList(string resource_group_name)
         {
-            Items = new List<Item>
+            this.Items = new List<Item>
             {
                 new Item
                 {

@@ -7,23 +7,15 @@ namespace ZabbixToItop.Models
     public class Ticket
     {
         public Ticket() {}
-        public Ticket(string operation, string @class, string comment, string output_fields, TicketFields fields)
-        {
-            this.Operation = operation;
-            this.Class = @class;
-            this.Comment = comment;
-            this.Output_fields = output_fields;
-            this.Fields = fields;
-        }
 
         public Ticket(RequestSettings settings)
         {
-            Class = settings.Class;
-            Status = settings.Status;
-            Comment = settings.Comment;
-            Operation = "core/create";
-            Output_fields = "id";
-            Fields = new TicketFields(settings);
+            this.Class = settings.Class;
+            this.Status = settings.Status;
+            this.Comment = settings.Comment;
+            this.Operation = "core/create";
+            this.Output_fields = "id";
+            this.Fields = new TicketFields(settings);
         }
 
         public string Operation { get; set; }

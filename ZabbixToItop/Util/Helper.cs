@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace ZabbixToItop.Util
 {
-    public class Helper
+    public static class Helper
     {
         public static string ObjectToJson(Object obj)
         {

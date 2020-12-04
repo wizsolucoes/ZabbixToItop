@@ -9,8 +9,8 @@ namespace ZabbixToItop.Models
 
         public Caller(string first_name, string name)
         {
-            First_name = first_name;
-            Name = name;
+            this.First_name = first_name;
+            this.Name = name;
         }
         public string First_name { get; set; }
         public string Name { get; set; }

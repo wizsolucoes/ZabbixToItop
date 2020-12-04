@@ -6,27 +6,27 @@ namespace ZabbixToItop.Settings
     {
         public RequestSettings(string[] args)
         {
-            Itop_url = args[0];
-            Itop_user = args[1];
-            Itop_pwd = args[2];
-            Class = args[5];
-            Description = args[6];
-            Origin = "monitoring";
-            Team = Helper.GetStringBetween(args[7], "EQUIPE:", ", IMPACTO:");
-            Ci = Helper.GetStringBetween(args[7], "Host:", "Severity:");
-            Urgency = Helper.GetStringBetween(args[7], "Severity:", "EQUIPE:");
-            Title = Ci;
-            Impact = Helper.GetStringBetween(args[7], "IMPACTO:", ", SERVICE:");
-            Status = "dispatched";
-            Comment = Ci;
-            Service_name = Helper.GetStringBetween(args[7], "SERVICE:", ", SERVICESUBCATEGORY:");
-            Service_subcategory_name = args[7].Split("SERVICESUBCATEGORY:")[1];     
-            Log.WriteText("Team = " + Team);
-            Log.WriteText("Ci = " + Ci);
-            Log.WriteText("Urgency = " + Urgency);
-            Log.WriteText("Impact = " + Impact);
-            Log.WriteText("Service = " + Service_name);
-            Log.WriteText("Service Subcategory = " + Service_subcategory_name);
+            this.Itop_url = args[0];
+            this.Itop_user = args[1];
+            this.Itop_pwd = args[2];
+            this.Class = args[5];
+            this.Description = args[6];
+            this.Origin = "monitoring";
+            this.Team = Helper.GetStringBetween(args[7], "EQUIPE:", ", IMPACTO:");
+            this.Ci = Helper.GetStringBetween(args[7], "Host:", "Severity:");
+            this.Urgency = Helper.GetStringBetween(args[7], "Severity:", "EQUIPE:");
+            this.Title = this.Ci;
+            this.Impact = Helper.GetStringBetween(args[7], "IMPACTO:", ", SERVICE:");
+            this.Status = "dispatched";
+            this.Comment = this.Ci;
+            this.Service_name = Helper.GetStringBetween(args[7], "SERVICE:", ", SERVICESUBCATEGORY:");
+            this.Service_subcategory_name = args[7].Split("SERVICESUBCATEGORY:")[1];     
+            Log.WriteText("Team = " + this.Team);
+            Log.WriteText("Ci = " + this.Ci);
+            Log.WriteText("Urgency = " + this.Urgency);
+            Log.WriteText("Impact = " + this.Impact);
+            Log.WriteText("Service = " + this.Service_name);
+            Log.WriteText("Service Subcategory = " + this.Service_subcategory_name);
         }
 
         public RequestSettings()
