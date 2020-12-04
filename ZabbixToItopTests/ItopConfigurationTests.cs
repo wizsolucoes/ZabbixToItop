@@ -13,19 +13,19 @@ namespace ZabbixToItopTests
         [TestMethod]
         public void Should_Initialize_ItopConfiguration_Correctly()
         {
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^MHost: Cluster1^M Severidade: Disaster^M Impacto: 2" };
-
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Host: AP-MATRIZ-Leste-Copa Severity: Average EQUIPE:Infra Datacenter, IMPACTO:2, SERVICE: Wifi Ativos de Rede, SERVICESUBCATEGORY:Rede wifi Indisponivel" };
+           
             var settings = new RequestSettings(args);
 
-            Assert.AreEqual(null, settings.Service_name);
-            Assert.AreEqual(null, settings.Service_subcategory_name);
-            Assert.AreEqual("Cluster1", settings.Title);
+            Assert.AreEqual("Wifi Ativos de Rede", settings.Service_name);
+            Assert.AreEqual("Rede wifi Indisponivel", settings.Service_subcategory_name);
+            Assert.AreEqual("AP-MATRIZ-Leste-Copa", settings.Title);
             Assert.AreEqual(null, settings.Resource_group_name);
-            Assert.AreEqual("Cluster1", settings.Comment);
+            Assert.AreEqual("AP-MATRIZ-Leste-Copa", settings.Comment);
             Assert.AreEqual("monitoring", settings.Origin);
-            Assert.AreEqual("Helpdesk", settings.Team);
+            Assert.AreEqual("Infra Datacenter", settings.Team);
             Assert.AreEqual("Description", settings.Description);
-            Assert.AreEqual("Cluster1", settings.Ci);
+            Assert.AreEqual("AP-MATRIZ-Leste-Copa", settings.Ci);
             Assert.AreEqual("Disaster", settings.Urgency);
             Assert.AreEqual("2", settings.Impact);
             Assert.AreEqual("UserRequest", settings.Class);

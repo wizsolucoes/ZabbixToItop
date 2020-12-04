@@ -18,43 +18,43 @@ namespace ZabbixToItop.Services
 
         public TeamsService(Exception exception, string teamsUrl)
         {
-            Message = exception.Message;
-            ErrorCode = "";
-            Body = exception.ToString();
-            TeamsUrl = teamsUrl;
+            this.Message = exception.Message;
+            this.ErrorCode = "";
+            this.Body = exception.ToString();
+            this.TeamsUrl = teamsUrl;
 
-            Client = new HttpClient();
+            this.Client = new HttpClient();
         }
 
         public TeamsService(ItopException exception, string teamsUrl)
         {
-            Message = exception.Message;
-            ErrorCode = exception.ErrorCode.ToString();
-            Body = exception.ToString();
-            TeamsUrl = teamsUrl;
+            this.Message = exception.Message;
+            this.ErrorCode = exception.ErrorCode.ToString();
+            this.Body = exception.ToString();
+            this.TeamsUrl = teamsUrl;
 
-            Client = new HttpClient();
+            this.Client = new HttpClient();
         }
 
 
         public TeamsService(Exception exception, string teamsUrl, HttpClient client)
         {
-            Message = exception.Message;
-            ErrorCode = "";
-            Body = exception.ToString();
-            TeamsUrl = teamsUrl;
+            this.Message = exception.Message;
+            this.ErrorCode = "";
+            this.Body = exception.ToString();
+            this.TeamsUrl = teamsUrl;
 
-            Client = client;
+            this.Client = client;
         }
 
         public TeamsService(ItopException exception, string teamsUrl, HttpClient client)
         {
-            Message = exception.Message;
-            ErrorCode = exception.ErrorCode.ToString();
-            Body = exception.ToString();
-            TeamsUrl = teamsUrl;
+            this.Message = exception.Message;
+            this.ErrorCode = exception.ErrorCode.ToString();
+            this.Body = exception.ToString();
+            this.TeamsUrl = teamsUrl;
 
-            Client = client;
+            this.Client = client;
         }
 
         public void SendError()
@@ -66,13 +66,13 @@ namespace ZabbixToItop.Services
                 Sections = new List<Section> {
                     new Section
                     {
-                        ActivityTitle = Message,
-                        ActivitySubtitle = ErrorCode,
+                        ActivityTitle = this.Message,
+                        ActivitySubtitle = this.ErrorCode,
                         Facts = new List<Fact>{
                             new Fact
                             {
                                 Name = "mensagem",
-                                Value = Message
+                                Value = this.Message
                             },
                             new Fact
                             {
@@ -82,7 +82,7 @@ namespace ZabbixToItop.Services
                             new Fact
                             {
                                 Name = "Status",
-                                Value = ErrorCode
+                                Value = this.ErrorCode
                             },
                             new Fact
                             {
@@ -92,7 +92,7 @@ namespace ZabbixToItop.Services
                             new Fact
                             {
                                 Name = "Body",
-                                Value = Body
+                                Value = this.Body
                             },
                             new Fact
                             {

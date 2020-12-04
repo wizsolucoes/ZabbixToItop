@@ -9,14 +9,14 @@ namespace ZabbixToItop.Models
 
         public TicketFields(RequestSettings settings)
         {
-            Origin = settings.Origin;
-            Contacts_list = new List<string> { settings.Team };
-            Team_id = "SELECT Team WHERE name = '" + settings.Team + "'";
-            Caller_id = new Caller("Processo", "Automatico");
-            Description = settings.Description;
-            Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + settings.Ci + "'";
-            Title = settings.Title;
-            Functionalcis_list = new List<Functionalcis>
+            this.Origin = settings.Origin;
+            this.Contacts_list = new List<string> { settings.Team };
+            this.Team_id = "SELECT Team WHERE name = '" + settings.Team + "'";
+            this.Caller_id = new Caller("Processo", "Automatico");
+            this.Description = settings.Description;
+            this.Org_id = "SELECT o FROM FunctionalCI AS fc JOIN Organization AS o ON fc.org_id = o.id WHERE fc.name='" + settings.Ci + "'";
+            this.Title = settings.Title;
+            this.Functionalcis_list = new List<Functionalcis>
             {
                 new Functionalcis
                 {
@@ -24,10 +24,10 @@ namespace ZabbixToItop.Models
                     Impact_code = "manual"
                 }
             };
-            Urgency = FindUrgencyId(settings.Urgency);
-            Impact = settings.Impact;
-            Service_id="SELECT Service WHERE name='"+settings.Service_name+"'";
-            Servicesubcategory_id="SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='"+settings.Service_subcategory_name+"' AND Service.name='"+settings.Service_name+"'";
+            this.Urgency = FindUrgencyId(settings.Urgency);
+            this.Impact = settings.Impact;
+            this.Service_id="SELECT Service WHERE name='"+settings.Service_name+"'";
+            this.Servicesubcategory_id="SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.name='"+settings.Service_subcategory_name+"' AND Service.name='"+settings.Service_name+"'";
         }
 
         public string FindUrgencyId(string urgency)

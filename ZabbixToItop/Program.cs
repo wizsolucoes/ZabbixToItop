@@ -1,4 +1,5 @@
-﻿using ZabbixToItop.Services;
+﻿using System.IO;
+using ZabbixToItop.Services;
 using ZabbixToItop.Exceptions;
 using System.Threading.Tasks;
 using System;
@@ -14,10 +15,16 @@ namespace ZabbixToItop
             {
                 if (args.Length == 8) 
                 {
-                    var log = new Log("ZabbixToItop.log", args);
+                    Log.LogPath = Path.Combine(args[4], "ZabbixToItop.log");
+                    Log.WriteText("-------------------- " + DateTime.Now + " --------------------");
+                    Log.WriteText("arg1 = " + args[5]);
+                    Log.WriteText("arg2 = " + args[6]);
+                    Log.WriteText("arg3 = " + args[7]);
                     Log.WriteText("args = " + String.Join(" ", args));
+
                     var itopService = new ItopService(args);
                     var response = await itopService.SaveTicketAsync();
+
                     Log.WriteText("Save ticket response = " + response);
                 }
                 else

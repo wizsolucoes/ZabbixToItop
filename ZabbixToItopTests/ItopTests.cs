@@ -33,7 +33,7 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^MHost: Cluster1^M Severidade: Disaster^M Impacto: 2" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Host: AP - MATRIZ - Leste - Copa Severity: Average EQUIPE:Infra Datacenter, IMPACTO:2, SERVICE: Wifi Ativos de Rede, SERVICESUBCATEGORY:Rede wifi Indisponivel" };
 
             var settings = new RequestSettings(args);
             var itop = new ItopService(args, httpClient);
@@ -61,62 +61,10 @@ namespace ZabbixToItopTests
                .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
 
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
+            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "Host: AP - MATRIZ - Leste - Copa Severity: Average EQUIPE:Infra Datacenter, IMPACTO:2, SERVICE: Wifi Ativos de Rede, SERVICESUBCATEGORY:Rede wifi Indisponivel" };
             var settings = new RequestSettings(args);
             var itop = new ItopService(args, httpClient);
             var result = await itop.SaveTicketAsync();
-        }
-
-        [TestMethod]
-        public async Task Should_Execute_Correctly_when_Find_Service_Subcategory()
-        {
-            var handlerMock = new Mock<HttpMessageHandler>();
-            var response = new HttpResponseMessage
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(@"{""objects"":{""ServiceSubcategory::15"":{""code"":0,""message"":"""",""class"":""ServiceSubcategory"",""key"":""15"",""fields"":{""id"":""15"",""friendlyname"":""Troubleshooting""}}},""code"":0,""message"":""Found: 1""}"),
-            };
-
-            handlerMock
-               .Protected()
-               .Setup<Task<HttpResponseMessage>>(
-                  "SendAsync",
-                  ItExpr.IsAny<HttpRequestMessage>(),
-                  ItExpr.IsAny<CancellationToken>())
-               .ReturnsAsync(response);
-            var httpClient = new HttpClient(handlerMock.Object);
-
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
-            var settings = new RequestSettings(args);
-            var itop = new ItopService(args, httpClient);
-            var result = await itop.GetServiceSubcategoryByCIAsync(settings.Ci);
-            Assert.AreEqual("SELECT ServiceSubcategory JOIN Service ON ServiceSubcategory.service_id = Service.id WHERE ServiceSubcategory.id='15'", result);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ItopException))]
-        public async Task Should_Throw_Error_When_Ci_Dont_Have_Service_Subcategory()
-        {
-            var handlerMock = new Mock<HttpMessageHandler>();
-            var response = new HttpResponseMessage
-            {
-                StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(@"{""objects"":null,""code"":0,""message"":""Found: 0""}"),
-            };
-
-            handlerMock
-               .Protected()
-               .Setup<Task<HttpResponseMessage>>(
-                  "SendAsync",
-                  ItExpr.IsAny<HttpRequestMessage>(),
-                  ItExpr.IsAny<CancellationToken>())
-               .ReturnsAsync(response);
-            var httpClient = new HttpClient(handlerMock.Object);
-
-            string[] args = new string[] { "https://testes.com", "", "", "", "", "UserRequest", "Description", "monitoring", "Problem started at 17:30:52 on 2020.11.18^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 1453^M", "none", "Helpdesk", "2" };
-            var settings = new RequestSettings(args);
-            var itop = new ItopService(args, httpClient);
-            var result = await itop.GetServiceSubcategoryByCIAsync(settings.Ci);
         }
     }
 }

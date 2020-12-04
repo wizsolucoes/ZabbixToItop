@@ -7,7 +7,7 @@ using System.Configuration;
 
 namespace ZabbixToItop.Util
 {
-    public class Helper
+    public static class Helper
     {
         public static string ObjectToJson(Object obj)
         {
@@ -31,17 +31,15 @@ namespace ZabbixToItop.Util
 
         public static string GetStringBetween(string text, string left, string right)
         {
-            // TODO: Validate input arguments
-
-            int beginIndex = text.IndexOf(left); // find occurence of left delimiter
+            int beginIndex = text.IndexOf(left);
             if (beginIndex == -1)
-                return string.Empty; // or throw exception?
+                return string.Empty;
 
-            beginIndex += left.Length;
-
-            int endIndex = text.IndexOf(right, beginIndex); // find occurence of right delimiter
+            beginIndex += left.Length; 
+ 
+            int endIndex = text.IndexOf(right, beginIndex);
             if (endIndex == -1)
-                return string.Empty; // or throw exception?
+                return string.Empty;
 
             return text.Substring(beginIndex, endIndex - beginIndex).Trim();
         }
