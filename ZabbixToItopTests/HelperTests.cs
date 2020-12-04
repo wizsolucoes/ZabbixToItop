@@ -81,8 +81,8 @@ namespace ZabbixToItopTests
         [TestMethod]
         public void Should_Get_The_Correct_Value_From_String()
         {
-            var response = Helper.GetStringBetween("Problem started at 17:10:52 on 2020.11.19^M Problem name: teste novo ping^M Host: Cluster1^M Severity: Disaster^M ^M Original problem ID: 3058^M ^M ^M Equipe: Helpdesk^M Host: Cluster1^M Severidade: Disaster^M Impacto: 2", "Equipe:", "Host:");
-            Assert.AreEqual("Helpdesk", response);
+            var response = Helper.GetStringBetween("Host: AP - MATRIZ - Leste - Copa Severity: Average EQUIPE:Infra Datacenter, IMPACTO:2, SERVICE: Wifi Ativos de Rede, SERVICESUBCATEGORY:Rede wifi Indisponivel", "SERVICE:", ", SERVICESUBCATEGORY");
+            Assert.AreEqual("Wifi Ativos de Rede", response);
         }
 
 
